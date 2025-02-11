@@ -1,1 +1,73 @@
-Hello world
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.pagepiling.css" />
+  </head>
+  <body>
+    <!-- section1 -->
+    <div id="pagepiling">
+      <div class="section bgwhite">
+        <div class="grid-container">
+          <main>
+            HELLO
+          </main>
+          <section class="container1">
+            section1
+          </section>
+          <section class="container2">
+            section2
+          </section>
+          <section class="footer">
+            footer
+          </section>
+          <header>
+            header
+          </header>
+          <div class="container3"></div>
+        </div>
+      </div>
+
+      <!-- section2 -->
+      <div class="section bgwhite">
+        <div class="grid-container2">
+          <main class="top">JOHN <br />JOHANSSON</main>
+          <section class="summer">
+            ABOUT
+          </section>
+          <section class="container2">
+            SKILLS
+          </section>
+          <div class="container4"></div>
+        </div>
+      </div>
+
+      <div class="section sec3"><h2>Nature</h2></div>
+      <div class="section sec4"><h2>section 4</h2></div>
+      <div class="section sec5"><h2>section 5</h2></div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.pagepiling.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js"
+    ></script>
+    <script>
+      $(document).ready(function() {
+        $("#pagepiling").pagepiling({
+          navigation: {
+            textColor: "#fff",
+            bulletsColor: "#fff",
+            position: "right",
+            tooltips: ["Home", "About", "Contact", "Info", "Footer"]
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
