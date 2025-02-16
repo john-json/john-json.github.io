@@ -651,7 +651,7 @@ f.addEventListener("submit", submitted);
 const apiKey = "026404d3de17740b166956b83f4563df";
 const cityId = "2861650";
 
-fetch(`http://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&lang=de&appid=${apiKey}`)
+fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&lang=de&appid=${apiKey}`)
 	.then((response) => response.json())
 	.then((data) => {
 		if (!data.main || data.main.temp === undefined) {
