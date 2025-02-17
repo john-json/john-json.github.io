@@ -3,6 +3,7 @@
 	<head>
 		<title>Ilstr01</title>
 		<meta charset="utf-8" />
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1" />
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
@@ -27,9 +28,9 @@
 	}
 
 	body {
-		font: 14px/1.5 "fonarto", Helvetica, sans-serif;
+		font: 500 40px/1 "fonarto", Helvetica, sans-serif;
 		color: #c5c5c5;
-		background: #1d1d1d;
+		background: #1f1f1f;
 		width: 100vw;
 		height: 100vh;
 		overflow: hidden;
@@ -91,22 +92,22 @@
 		padding-top: 4em;
 	}
 	#realTimeClock {
-		font: 500 20px/1 "fonarto", Helvetica, sans-serif;
-		font-size: 2rem;
+	
+		font-size: 1rem;
 		color: rgb(222, 222, 222);
 	}
 
 	#realTimeDate {
-		font: 500 20px/1 "fonarto", Helvetica, sans-serif;
+
 		color: rgb(235, 235, 235);
-		font-size: 0.8rem;
-		padding-top: 2em;
+		font-size: 1rem;
+		padding-top: 1em;
 	}
 
 	.weather {
-		font: 500 20px/1 "fonarto", Helvetica, sans-serif;
-		font-size: 2rem;
-		padding-top: 10%;
+
+		font-size: 1rem;
+		padding-top: 1em;
 	}
 
 	h1 {
@@ -150,7 +151,6 @@
 		position: relative;
 		top: 2vh;
 		left: 5em;
-		font: 500 40px/1 "fonarto", Helvetica, sans-serif;
 	}
 
 	.section {
@@ -292,7 +292,7 @@
 	}
 
 	body {
-		font: 14px/1.5 "fonarto", Helvetica, sans-serif;
+		font: 500 40px/1 "fonarto", Helvetica, sans-serif;
 		color: #222222;
 		background: #ffffff;
 		width: 100vw;
@@ -356,21 +356,19 @@
 	}
 
 	#realTimeClock {
-		font: "fonarto", Helvetica, sans-serif;
-		font-size: 2rem;
-		font-weight: bold;
+		font-size: 1rem;
 		color: rgb(53, 53, 53);
 	}
 
 	#realTimeDate {
-		font: "fonarto", Helvetica, sans-serif;
+
 		color: rgb(53, 53, 53);
 		font-size: 1rem;
 		padding-top: 1em;
 	}
 	.weather {
 		padding-top: 1em;
-		font: 500 20px/1 "fonarto", Helvetica, sans-serif;
+		font-size: 1rem;
 	}
 	#city {
 		padding-top: 1em;
@@ -378,7 +376,7 @@
 	}
 	#temp {
 		padding-top: 1em;
-		font-size: 2rem;
+		font-size: 1rem;
 	}
 
 	h1 {
@@ -403,10 +401,12 @@
 
 	a:hover {
 		color: #d2926a;
+	        border-bottom: 1px solid #d2926a;
 	}
 
 	a:focus {
 		color: #d2926a;
+		     border-bottom: 2px solid #d2926a;
 	}
 
 	::-moz-focus-inner {
@@ -422,7 +422,7 @@
 		position: relative;
 		top: 2vh;
 		left: 5em;
-		font: 500 40px/1 "fonarto", Helvetica, sans-serif;
+		
 	}
 
 	.section {
@@ -557,10 +557,10 @@
 		<section class="section cr-items">
 			<section class="section-1">
 				<picture>
-					<img class="img only-on-dark" srcset="assets/images/logo-dark.png" media="(prefers-color-scheme: dark)" />
+					<img class="img only-on-dark" srcset="assets/img/logo-dark.png" media="(prefers-color-scheme: dark)" />
 				</picture>
 				<picture>
-					<img class="img only-on-light" srcset="assets/images/logo-light.png" media="(prefers-color-scheme: light)" />
+					<img class="img only-on-light" srcset="assets/img/logo-light.png" media="(prefers-color-scheme: light)" />
 				</picture>
 			</section>
 			<section class="section column-section section-2 cr-items">
@@ -574,7 +574,7 @@
 					<a class="footer-links link-behance" href="https://de.pinterest.com/homefeed/">PINTEREST</a>
 					<div class="search-bar">
 						<form role="search" id="form" action="http://www.google.com/search" method="get">
-							<input class="search" type="search" id="query" name="q" placeholder="Search...">
+							<input class="search" type="search" id="query" name="q" placeholder="Search..." autofocus />
 							<button type="submit" hidden > <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
 							
 							
