@@ -100,7 +100,8 @@
 	#realTimeDate {
 
 		color: rgb(235, 235, 235);
-		font-size: 2rem;
+		font-size: 1.5rem;
+		line-height: 50px;
 		padding-top: 1em;
 	}
 
@@ -127,7 +128,7 @@
 		text-decoration: none;
 		text-align: left;
 		top: 1.2%;
-		font-size: 1em;
+		font-size: 1.5em;
 	}
 
 	a:hover {
@@ -397,7 +398,7 @@
 		text-decoration: none;
 		text-align: left;
 		top: 1%;
-		font-size: 1em;
+		font-size: 1.5em;
 	}
 
 	a:hover {
@@ -557,12 +558,18 @@
 	<body>
 		<section class="section cr-items">
 			<section class="section-1">
+
 				<picture>
 					<img class="img only-on-dark" srcset="assets/img/logo-dark.png" media="(prefers-color-scheme: dark)" />
 				</picture>
 				<picture>
 					<img class="img only-on-light" srcset="assets/img/logo-light.png" media="(prefers-color-scheme: light)" />
 				</picture>
+													<div class="clock">
+						<div id="realTimeClock" class="text-white"></div>
+						<div id="realTimeDate" class="text-white"></div>
+			
+					</div>
 					<div class="search-bar">
 					<form role="search" id="form" action="http://www.google.com/search" method="get" >
 					<input class="search" type="search" id="query" name="q" placeholder="Search..." auto-complete="url" autofocus />
@@ -579,12 +586,8 @@
 					<a class="footer-links link-dribbble" href="https://github.com/john-json?tab=repositories">GITHUB</a>
 					<a class="footer-links link-behance" href="https://dribbble.com">DRIBBLE</a>
 					<a class="footer-links link-behance" href="https://de.pinterest.com/homefeed/">PINTEREST</a>
-	
-					<div class="clock">
-						<div id="realTimeClock" class="text-white"></div>
-						<div id="realTimeDate" class="text-white"></div>
-						<div class="weather column-section section-3 cr-items"><p><span id="temp"></span>°C<br/></p></div>
-					</div>
+				<div class="weather column-section section-3 cr-items"><p><span id="temp"></span>°C<br/></p></div>
+
 				</div>
 			</section>
 		</section>
@@ -600,10 +603,13 @@ if (prefersDarkScheme.matches) {
 }
 
 function updateClock() {
+	const weekday = {weekday: "long"};
+	const monthday = {day: "numeric"};
 	const dateElement = document.getElementById("realTimeDate");
 
 	const currentDate = new Date();
-	const formattedDate = currentDate.toLocaleDateString("de-DE");
+	const formattedDate = currentDate.toLocaleDateString("en-EN", monthday);
+	const formattedDay = currentDate.toLocaleDateString("en-EN", weekday);
 	console.log(formattedDate); // Output: "2024-12-21" (or similar format)
 
 	const clockElement = document.getElementById("realTimeClock");
@@ -615,7 +621,7 @@ function updateClock() {
 
 	// Format time
 	const timeString = `${hours}:${minutes}`;
-	const dateString = `${formattedDate}`;
+	const dateString = `${formattedDate} ${formattedDay}`;
 
 	// Display time
 	clockElement.textContent = timeString;
