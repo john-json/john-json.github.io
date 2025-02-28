@@ -603,7 +603,7 @@ function updateClock() {
 	const dateElement = document.getElementById("realTimeDate");
 
 	const currentDate = new Date();
-	const formattedDate = currentDate.toLocaleDateString("de_DE", "%d" "%b");
+	const formattedDate = currentDate.toLocaleDateString("de_DE", "%d %b");
 	console.log(formattedDate); // Output: "2024-12-21" (or similar format)
 
 	const clockElement = document.getElementById("realTimeClock");
