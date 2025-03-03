@@ -41,7 +41,7 @@
 	}
 	img {
 		max-height: 400px;
-		position: absolute;
+		position: relative;
 	}
 
 	.only-on-dark {
@@ -52,7 +52,7 @@
 		display: none;
 	}
 	.img {
-                position: absolutely;
+position: absolutely;
 		background: url(../assets/image-dark.png) no-repeat center;
 		top: 15%;
 		left: 0%;
@@ -91,18 +91,16 @@
 		filter: drop-shadow(0px 2px 2px #00000059);
 	}
 	.clock {
-		position:absolut;
-		z-index: 100000;
 		padding-top: 4em;
 	}
 	#realTimeClock {
-	z-index: 100000;
+	
 		font-size: 5rem;
 		color: rgb(222, 222, 222);
 	}
 
 	#realTimeDate {
-z-index: 100000;
+
 		color: rgb(235, 235, 235);
 		font-size: 1.5rem;
 		line-height: 50px;
@@ -110,7 +108,7 @@ z-index: 100000;
 	}
 
 	.weather {
-z-index: 10000;
+
 		font-size: 3rem;
 		padding-top: 1em;
 	}
@@ -309,7 +307,6 @@ z-index: 10000;
 		-moz-osx-font-smoothing: grayscale;
 	}
 	img {
-		background: url(../assets/image-light.png) no-repeat center;
 		max-height: 500px;
 		position: relative;
 	}
@@ -329,7 +326,6 @@ z-index: 10000;
 	}
 
 	.search-bar {
-		z-index: 10000;
 		padding-top: 30px;
 		align-items: center;
 		bottom: -11px;
@@ -360,24 +356,21 @@ z-index: 10000;
 		filter: drop-shadow(0px 2px 2px #00000059);
 	}
 	.clock {
-		z-index: 12200;
 		padding-top: 4em;
 	}
 
 	#realTimeClock {
-		z-index: 12202;
 		font-size: 4rem;
 		color: rgb(53, 53, 53);
 	}
 
 	#realTimeDate {
-	z-index: 12222;
+
 		color: rgb(53, 53, 53);
 		font-size: 2rem;
 		padding-top: 2em;
 	}
 	.weather {
-			z-index: 1222202;
 		padding-top: 3em;
 		font-size: 1rem;
 	}
@@ -567,25 +560,22 @@ z-index: 10000;
 	<body>
 		<section class="section cr-items">
 			<section class="section-1">
-
 				<picture>
-					<img class="img only-on-dark"  media="(prefers-color-scheme: dark)" />
+					<source class="img only-on-dark" srcset="assets/img/logo-dark.png" media="(prefers-color-scheme: dark)" />
 				</picture>
 				<picture>
-					<img class="img only-on-light"  media="(prefers-color-scheme: light)" />
+					<img source="img only-on-light" srcset="assets/img/logo-light.png" media="(prefers-color-scheme: light)" />
 				</picture>
 
-	
-					<div class="clock">
-						<div id="realTimeClock" class="text-white"></div>
-						<div id="realTimeDate" class="text-white"></div>
-					</div>
-
-				<div class="search-bar">
+					<div class="search-bar">
 					<form role="search" id="form" action="http://www.google.com/search" method="get" >
 					<input class="search" type="search" id="query" name="q" placeholder="Search..." auto-complete="url" autofocus />
 					<button type="submit" hidden > <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>>
 					</button>
+					</div>
+					<div class="clock">
+						<div id="realTimeClock" class="text-white"></div>
+						<div id="realTimeDate" class="text-white"></div>
 					</div>
 			</section>
 			<section class="section column-section section-2 cr-items">
