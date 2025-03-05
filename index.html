@@ -594,12 +594,14 @@ if (prefersDarkScheme.matches) {
 } else {
 	document.body.classList.add("light-theme");
 }
-
 function updateClock() {
+	const weekday = {weekday: "long"};
+	const monthday = {day: "numeric"};
 	const dateElement = document.getElementById("realTimeDate");
 
 	const currentDate = new Date();
-	const formattedDate = currentDate.toLocaleDateString("de-DE");
+	const formattedDate = currentDate.toLocaleDateString("en-EN", monthday);
+	const formattedDay = currentDate.toLocaleDateString("en-EN", weekday);
 	console.log(formattedDate); // Output: "2024-12-21" (or similar format)
 
 	const clockElement = document.getElementById("realTimeClock");
@@ -611,13 +613,12 @@ function updateClock() {
 
 	// Format time
 	const timeString = `${hours}:${minutes}`;
-	const dateString = `${formattedDate}`;
+	const dateString = `${formattedDate} ${formattedDay}`;
 
 	// Display time
 	clockElement.textContent = timeString;
 	dateElement.textContent = dateString;
 }
-
 // Initialize clock and update it every second
 setInterval(updateClock, 1000);
 updateClock(); // Call immediately to avoid initial delay
