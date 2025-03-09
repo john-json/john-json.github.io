@@ -615,7 +615,7 @@ function updateClock() {
 	const minutes = now.getMinutes().toString().padStart(2, "0");
 
 	// Format time
-	const timeString = `${hours}:${minutes}`;
+	const timeString = `${hours}│${minutes}`;
 	const dateString = `${formattedDate} ${formattedDay}`;
 
 	// Display time
