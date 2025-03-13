@@ -298,7 +298,7 @@ font-size: 2em;
 	}
 
 	body {
-		font: 500 8px/1 "fonarto", Helvetica, sans-serif;
+		font: 500 12px/1 "fonarto", Helvetica, sans-serif;
 		line-height: 2.5;
 		letter-spacing: 22px;
 		color: #222222;
@@ -339,7 +339,7 @@ font-size: 2em;
 	}
 
 	.search {
-		font-size: 2rem;
+		font-size: 1rem;
 		width: 40px;
 		padding: 10px 0px;
 		color: #292929;
@@ -365,26 +365,26 @@ font-size: 2em;
 	}
 
 	#realTimeClock {
-		font-size: 2rem;
+		font-size: 1rem;
 		color: rgb(53, 53, 53);
 	}
 
 	#realTimeDate {
-font-size: 2em;
+font-size: 1rem;
 		color: rgb(53, 53, 53);
 		padding-top: 2rem;
 	}
 	.weather {
 		padding-top: 1em;
-	font-size: 2em;
+	font-size: 1rem;
 	}
 	#city {
 		padding-top: 1em;
-		font-size: 2rem;
+		font-size: 1rem;
 	}
 	#temp {
 		padding-top: 1em;
-		font-size: 2rem;
+		font-size: 1rem;
 	}
 
 	h1 {
@@ -400,11 +400,11 @@ font-size: 2em;
 	a {
 		line-height: 6rem;
 		color: rgb(53, 53, 53);
-		position: absolute;
+		position: fixed;
 		text-decoration: none;
 		text-align: left;
 		top: 1%;
-		font-size: 2rem;
+		font-size: 1rem;
 	}
 
 	a:hover {
@@ -427,7 +427,7 @@ font-size: 2em;
 	}
 
 	.main-text {
-		position: relative;
+		position: fixed;
 		top: 2vh;
 		left: 5em;
 		
@@ -442,7 +442,7 @@ font-size: 2em;
 	}
 
 	.main-text-medium {
-		font-size: 2rem;
+		font-size: 1rem;
 		letter-spacing: 22px;
 	}
 
@@ -567,6 +567,7 @@ font-size: 2em;
 					<div class="clock animate__animated animate__slideInDown">
 						<div id="realTimeClock" class="text-white"></div>
 						<div id="realTimeDate" class="text-white"></div>
+						<div id="realTimeInfo" class="text-white"></div>
 						<div class="weather"><p><span id="temp"></span>°C</p></div>
 					</div>
 
