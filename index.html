@@ -159,13 +159,18 @@ font-size: 2em;
 		left: 5em;
 	}
 
-	.section {
-		z-index: 0;
-		display: -webkit-box;
-		box-sizing: border-box;
-		min-height: 100vh;
-		min-width: 10vw;
-	}
+
+.section {
+	z-index: 1;
+	position: relative;
+	padding: 96px 0 96px 96px;
+	width: calc(100vw - 96px - 7em);
+	display: -webkit-box;
+	display: flex;
+	box-sizing: border-box;
+	min-height: 100vh;
+}
+	
 
 	.main-text-medium {
 	font-size: 2em;
