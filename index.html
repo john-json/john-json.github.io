@@ -646,7 +646,7 @@ function updateClock() {
 	const minutes = now.getMinutes().toString().padStart(2, "0");
 
 	// Format time
-	const timeString = `${hours}│${minutes}`;
+	const timeString = `${hours}${minutes}`;
 	const dateString = `${formattedDate}${formattedDay}`;
 
 	// Display time
@@ -692,15 +692,18 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric
 		}
 
 		const city = data.name;
-		const temp = Math.round(data.main.temp); // Standard rounding works for both positive and negative
+		const temp = Math.round(data.main.temp);
+		const cond = data.current.weather.main// Standard rounding works for both positive and negative
 
-		console.log(`City: ${city}, Temperature: ${temp}`); // Debugging
+		console.log(`City: ${city}, Temperature: ${temp}, Condition: ${cond}`); // Debugging
 
 		const cityElem = document.getElementById("city");
 		const tempElem = document.getElementById("temp");
+		const condElem = document.getElementById("cond");
 
 		if (cityElem) cityElem.textContent = city;
 		if (tempElem) tempElem.textContent = temp;
+		if (condElem) condElem.textContent = cond;
 	})
 	.catch((error) => console.error("API Error:", error));
 		</script>
