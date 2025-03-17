@@ -2,45 +2,48 @@
 <html lang="en">
 <head>
     <title>Ilstr01</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1" />
-    <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
+        /* ================================================ 
+        Author: john-json
+        Name: ilstr01-start-page
+        URL: https://john-json.github.io
+        Version: 0.0.2 (Fixed Light/Dark Mode)
+        ================================================ */
         @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:400,500");
 
-        /* Root Variables for Easy Theme Switching */
+        /* Global Variables for Theming */
         :root {
-            --background-color: #ffffff;
+            --bg-color: #ffffff;
             --text-color: #1f1f1f;
-            --link-color: #1f1f1f;
+            --link-color: #000000;
+            --hover-color: #d2926a;
             --border-color: #bcbcbc;
+            --shadow-color: rgba(0, 0, 0, 0.35);
         }
 
-        /* Dark Mode Overrides */
         @media (prefers-color-scheme: dark) {
             :root {
-                --background-color: #1f1f1f;
+                --bg-color: #1f1f1f;
                 --text-color: #c5c5c5;
-                --link-color: white;
+                --link-color: #ffffff;
+                --hover-color: #d2926a;
                 --border-color: #bcbcbc;
+                --shadow-color: rgba(255, 255, 255, 0.35);
             }
         }
 
-        html {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            overflow: hidden;
-        }
-
-        body {
+        html, body {
             font: 500 8px/1 "fonarto", Helvetica, sans-serif;
             line-height: 2.5;
             letter-spacing: 22px;
             color: var(--text-color);
-            background: var(--background-color);
+            background: var(--bg-color);
             width: 100vw;
             height: 100vh;
             overflow: hidden;
@@ -55,27 +58,16 @@
             position: relative;
         }
 
-        .only-on-dark {
-            display: none;
-        }
-
-        .only-on-light {
-            display: block;
-        }
+        /* Visibility Toggles */
+        .only-on-dark { display: none; }
+        .only-on-light { display: block; }
 
         @media (prefers-color-scheme: dark) {
-            .only-on-dark {
-                display: block;
-            }
-            .only-on-light {
-                display: none;
-            }
+            .only-on-dark { display: block; }
+            .only-on-light { display: none; }
         }
 
-        .fav-links {
-            padding-top: 22px;
-        }
-
+        /* Search Bar */
         .search-bar {
             padding-bottom: 5px;
             align-items: center;
@@ -96,30 +88,24 @@
             align-items: center;
         }
 
-        .search:hover {
-            filter: drop-shadow(0px 8px 8px #00000059);
-        }
-
+        .search:hover,
         .search:focus {
-            filter: drop-shadow(5px 8px 8px #00000059);
+            filter: drop-shadow(5px 8px 8px var(--shadow-color));
         }
 
+        /* Clock */
         .clock {
             padding-top: 2%;
             width: 100%;
             height: 100%;
         }
 
-        #realTimeClock {
+        #realTimeClock, #realTimeDate {
             font-size: 2em;
             color: var(--text-color);
         }
 
-        #realTimeDate {
-            font-size: 1rem;
-            color: var(--text-color);
-        }
-
+        /* Weather */
         .weather {
             font-size: 1rem;
         }
@@ -134,11 +120,7 @@
             font-size: 1rem;
         }
 
-        p {
-            margin: 0;
-            padding: 0;
-        }
-
+        /* Links */
         a {
             line-height: 2rem;
             color: var(--link-color);
@@ -149,10 +131,21 @@
             font-size: 1rem;
         }
 
-        a:hover, a:focus {
-            color: #d2926a;
+        a:hover,
+        a:focus {
+            color: var(--hover-color);
         }
 
+        ::-moz-focus-inner {
+            padding: 0;
+            border: 0;
+        }
+
+        :focus {
+            outline: 0;
+        }
+
+        /* Sections */
         .main-text {
             position: sticky;
             bottom: 5%;
@@ -188,6 +181,24 @@
             letter-spacing: 22px;
         }
 
+        /* Footer */
+        .footer-links {
+            line-height: 2.5;
+            position: relative;
+            left: 0%;
+            background-color: transparent;
+            padding: 0px;
+        }
+
+        .footer {
+            position: absolute;
+            left: auto;
+            bottom: auto;
+            padding: 0 7.5vw 7.5vw;
+            align-items: flex-start;
+        }
+
+        /* Responsive Fixes */
         @media (max-width: 400px) {
             .logo {
                 width: 100vw;
@@ -221,67 +232,10 @@
         .list-item:last-child {
             margin-bottom: -0.4em;
         }
-
-        .footer-links {
-            line-height: 2.5;
-            position: relative;
-            left: 0%;
-            padding: 0px;
-        }
-
-        .footer {
-            position: absolute;
-            left: auto;
-            bottom: auto;
-            padding: 0 7.5vw 7.5vw;
-            align-items: flex-start;
-        }
-
-        .footer-links {
-            display: inline;
-        }
-
-        @media (hover: hover) {
-            .footer-links:nth-child(odd):hover ~ .scrunch {
-                background-color: #a1a1a1;
-            }
-
-            .footer-links:nth-child(2n):hover ~ .scrunch {
-                background-color: #3a3a3a;
-            }
-
-            .link-email:hover ~ .scrunch:after {
-                animation: one 1s 0.25s linear forwards;
-            }
-
-            .link-behance:hover ~ .scrunch:after {
-                animation: two 1s 0.25s linear forwards;
-            }
-
-            .link-dribbble:hover ~ .scrunch:after {
-                animation: three 1s 0.25s linear forwards;
-            }
-
-            .link-linkedin:hover ~ .scrunch:after {
-                animation: four 1s 0.25s linear forwards;
-            }
-
-            .link-twitter:hover ~ .scrunch:after {
-                animation: five 1s 0.25s linear forwards;
-            }
-
-            .link-instagram:hover ~ .scrunch:after {
-                animation: six 1s 0.25s linear forwards;
-            }
-
-            .link-site:hover ~ .scrunch:after {
-                animation: seven 1s 0.25s linear forwards;
-            }
-        }
     </style>
 </head>
 <body>
-    <h1 class="only-on-light">Light Mode</h1>
     <h1 class="only-on-dark">Dark Mode</h1>
+    <h1 class="only-on-light">Light Mode</h1>
 </body>
 </html>
