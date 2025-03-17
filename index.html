@@ -1,287 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Ilstr01</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1" />
-    <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <style>
-        @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:400,500");
+	<head>
+		<title>Ilstr01</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1" />
+		<link rel="shortcut icon" href="favicon.ico" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+		  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+		<style>
+			
+	/*  ================================================
+	Author: john-json
+	Name: ilstr01-start-page
+	URL: https://john-json.github.io
+	Version: 0.0.1
+	================================================ */
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:400,500");
+/* Google Fonts */
 
-        /* Root Variables for Easy Theme Switching */
-        :root {
-            --background-color: #ffffff;
-            --text-color: #1f1f1f;
-            --link-color: #1f1f1f;
-            --border-color: #bcbcbc;
-        }
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+	}
+	html {
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		overflow: hidden;
+		/* Hide scrollbars */
+	}
 
-        /* Dark Mode Overrides */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background-color: #1f1f1f;
-                --text-color: #c5c5c5;
-                --link-color: white;
-                --border-color: #bcbcbc;
-            }
-        }
+	body {
+		font: 500 8px/1 "fonarto", Helvetica, sans-serif;
+		line-height: 2.5;
+		letter-spacing: 22px;
+		color: #c5c5c5;
+		background: #1f1f1f;
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		/* Hide scrollbars */
+		margin: 6%;
+		top: 2%;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+	img {
+		max-height: 500px;
+		position: relative;
+	}
 
-        html {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            overflow: hidden;
-        }
+	.only-on-dark {
+		display: block;
+	}
 
-        body {
-            font: 500 8px/1 "fonarto", Helvetica, sans-serif;
-            line-height: 2.5;
-            letter-spacing: 22px;
-            color: var(--text-color);
-            background: var(--background-color);
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            margin: 6%;
-            top: 2%;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+	.only-on-light {
+		display: none;
+	}
+	.fav-links {
+		padding-top: 22px;
+	}
 
-        img {
-            max-height: 500px;
-            position: relative;
-        }
+	.search-bar {
+		padding-bottom: 5px;
+		align-items: center;
+		bottom: -11px;
+		border-bottom: 1px solid #bcbcbc;
+		width: 280px;
+		left: 10%;
+		font-size: 1rem;
+	}
 
-        .only-on-dark {
-            display: none;
-        }
+	.search {
+		
+		padding: 10px 0px;
+		color: #c5c5c5;
+		background-color: #9e000000;
+		border-style: none;
+		width: 280px;
+		height: 20px;
+		align-items: center;
+	}
+	.search:hover {
+		filter: drop-shadow(0px 8px 8px #00000059);
+	}
+	.search:focus {
+		filter: drop-shadow(5px 8px 8px #00000059);
+	}
 
-        .only-on-light {
-            display: block;
-        }
+	.search:after {
+		filter: drop-shadow(0px 2px 2px #00000059);
+	}
+	.clock {
+		padding-top: 2%;
+		width: 100%;
+		height: 100%;
+	}
+	#realTimeClock {
+font-size: 2em;
+		
+		color: rgb(235, 235, 235);
+	}
 
-        @media (prefers-color-scheme: dark) {
-            .only-on-dark {
-                display: block;
-            }
-            .only-on-light {
-                display: none;
-            }
-        }
+	#realTimeDate {
+                font-size: 1rem;
+		color: rgb(235, 235, 235);
 
-        .fav-links {
-            padding-top: 22px;
-        }
+	}
 
-        .search-bar {
-            padding-bottom: 5px;
-            align-items: center;
-            bottom: -11px;
-            border-bottom: 1px solid var(--border-color);
-            width: 280px;
-            left: 10%;
-            font-size: 1rem;
-        }
+	.weather {
 
-        .search {
-            padding: 10px 0px;
-            color: var(--text-color);
-            background-color: transparent;
-            border-style: none;
-            width: 280px;
-            height: 20px;
-            align-items: center;
-        }
+		font-size: 1rem;
 
-        .search:hover {
-            filter: drop-shadow(0px 8px 8px #00000059);
-        }
+	}
+		#city {
+		padding-top: 1em;
+		font-size: 2rem;
+	}
+	#temp {
+		padding-top: 1em;
+		font-size: 1rem;
+	}
 
-        .search:focus {
-            filter: drop-shadow(5px 8px 8px #00000059);
-        }
 
-        .clock {
-            padding-top: 2%;
-            width: 100%;
-            height: 100%;
-        }
+	p {
+		margin: 0;
+		padding: 0;
+	}
 
-        #realTimeClock {
-            font-size: 2em;
-            color: var(--text-color);
-        }
+	a {
+		line-height: 2rem;
+		color: white;
+		text-decoration: none;
+		text-align: left;
+		top: 1%;
+		left: 10%;
+		font-size: 1rem;
+	}
 
-        #realTimeDate {
-            font-size: 1rem;
-            color: var(--text-color);
-        }
+	a:hover {
+		color: #d2926a;
+	}
 
-        .weather {
-            font-size: 1rem;
-        }
+	a:focus {
+		color: #d2926a;
+	}
 
-        #city {
-            padding-top: 1em;
-            font-size: 2rem;
-        }
+	::-moz-focus-inner {
+		padding: 0;
+		border: 0;
+	}
 
-        #temp {
-            padding-top: 1em;
-            font-size: 1rem;
-        }
+	:focus {
+		outline: 0;
+	}
 
-        p {
-            margin: 0;
-            padding: 0;
-        }
+	.main-text {
+		position: sticky;
+		bottom: 5%;
+		left: 5em;
+		max-width: 100px,
+		
+	}
 
-        a {
-            line-height: 2rem;
-            color: var(--link-color);
-            text-decoration: none;
-            text-align: left;
-            top: 1%;
-            left: 10%;
-            font-size: 1rem;
-        }
 
-        a:hover, a:focus {
-            color: #d2926a;
-        }
+.section {
+	z-index: 1;
+	position: fixed;
+	width: calc(100vw - 96px - 7em);
+	display: -webkit-box;
+	display: flex;
+	padding: 15%;
+	box-sizing: border-box;
+	min-height: 50vh;
+}
+	
+.section-1 {
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	
+}
+	
+	
+	.section-2 {
+		position: fixed;
+	        bottom: 0;
+		max-width: 100px;
+		left: 0;
+	
+}
+	
+	.main-text-medium {
+	font-size: 2em;
+		letter-spacing: 22px;
+	}
 
-        .main-text {
-            position: sticky;
-            bottom: 5%;
-            left: 5em;
-            max-width: 100px;
-        }
+	@media (max-width: 400px) {
+		.logo {
+			width: 100vw;
+			height: 50vh;
+		}
 
-        .section {
-            z-index: 1;
-            position: fixed;
-            width: calc(100vw - 96px - 7em);
-            display: flex;
-            padding: 15%;
-            box-sizing: border-box;
-            min-height: 50vh;
-        }
+		.column-section-main {
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			flex-direction: column;
+		}
+	}
 
-        .section-1 {
-            position: fixed;
-            bottom: 5%;
-            right: 5%;
-        }
+	.column-section {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		flex-direction: column;
+	}
 
-        .section-2 {
-            position: fixed;
-            bottom: 0;
-            max-width: 100px;
-            left: 0;
-        }
+	.col-section {
+		width: 100%;
+		max-width: 400px;
+	}
 
-        .main-text-medium {
-            font-size: 2em;
-            letter-spacing: 22px;
-        }
+	.list {
+		margin-top: 2em;
+		position: relative;
+	}
 
-        @media (max-width: 400px) {
-            .logo {
-                width: 100vw;
-                height: 50vh;
-            }
+	.list-item {
+		margin-top: 0.25em;
+		margin-bottom: 2em;
+	}
 
-            .column-section-main {
-                flex-direction: column;
-            }
-        }
+	.list-item:last-child {
+		margin-bottom: -0.4em;
+	}
 
-        .column-section {
-            flex-direction: column;
-        }
+	.footer-links {
+		line-height: 2.5;
+		position: relative;
+		left: 0%;
+		background-color: #202022;
+		padding: 0px;
+	}
 
-        .col-section {
-            width: 100%;
-            max-width: 400px;
-        }
+	.footer {
+		position: absolute;
+		left: auto;
+		bottom: auto;
+		padding: 0 7.5vw 7.5vw;
+		-webkit-box-align: start;
+		align-items: flex-start;
+	}
 
-        .list {
-            margin-top: 2em;
-            position: relative;
-        }
+	.footer-links {
+		display: inline;
+	}
 
-        .list-item {
-            margin-top: 0.25em;
-            margin-bottom: 2em;
-        }
+	@media (hover: hover) {
+		.footer-links:nth-child(odd):hover ~ .scrunch {
+			background-color: #a1a1a1;
+		}
 
-        .list-item:last-child {
-            margin-bottom: -0.4em;
-        }
+		.footer-links:nth-child(2n):hover ~ .scrunch {
+			background-color: #3a3a3a;
+		}
 
-        .footer-links {
-            line-height: 2.5;
-            position: relative;
-            left: 0%;
-            padding: 0px;
-        }
+		.link-email:hover ~ .scrunch:after {
+			-webkit-animation: one 1s 0.25s linear forwards;
+			animation: one 1s 0.25s linear forwards;
+		}
 
-        .footer {
-            position: absolute;
-            left: auto;
-            bottom: auto;
-            padding: 0 7.5vw 7.5vw;
-            align-items: flex-start;
-        }
+		.link-behance:hover ~ .scrunch:after {
+			-webkit-animation: two 1s 0.25s linear forwards;
+			animation: two 1s 0.25s linear forwards;
+		}
 
-        .footer-links {
-            display: inline;
-        }
+		.link-dribbble:hover ~ .scrunch:after {
+			-webkit-animation: three 1s 0.25s linear forwards;
+			animation: three 1s 0.25s linear forwards;
+		}
 
-        @media (hover: hover) {
-            .footer-links:nth-child(odd):hover ~ .scrunch {
-                background-color: #a1a1a1;
-            }
+		.link-linkedin:hover ~ .scrunch:after {
+			-webkit-animation: four 1s 0.25s linear forwards;
+			animation: four 1s 0.25s linear forwards;
+		}
 
-            .footer-links:nth-child(2n):hover ~ .scrunch {
-                background-color: #3a3a3a;
-            }
+		.link-twitter:hover ~ .scrunch:after {
+			-webkit-animation: five 1s 0.25s linear forwards;
+			animation: five 1s 0.25s linear forwards;
+		}
 
-            .link-email:hover ~ .scrunch:after {
-                animation: one 1s 0.25s linear forwards;
-            }
+		.link-instagram:hover ~ .scrunch:after {
+			-webkit-animation: six 1s 0.25s linear forwards;
+			animation: six 1s 0.25s linear forwards;
+		}
 
-            .link-behance:hover ~ .scrunch:after {
-                animation: two 1s 0.25s linear forwards;
-            }
+		.link-site:hover ~ .scrunch:after {
+			-webkit-animation: seven 1s 0.25s linear forwards;
+			animation: seven 1s 0.25s linear forwards;
+		}
+	}
+}
 
-            .link-dribbble:hover ~ .scrunch:after {
-                animation: three 1s 0.25s linear forwards;
-            }
+@media (prefers-color-scheme: light) {
+	:root {
+		color-scheme: light;
+	}
+	html {
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		overflow: hidden;
+		/* Hide scrollbars */
+	}
 
-            .link-linkedin:hover ~ .scrunch:after {
-                animation: four 1s 0.25s linear forwards;
-            }
+	body {
+		font: 500 12px/1 "fonarto", Helvetica, sans-serif;
+		line-height: 2.5;
+		letter-spacing: 22px;
+		color: #222222;
+		background: #ffffff;
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		/* Hide scrollbars */
+		margin: 15%;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
 
-            .link-twitter:hover ~ .scrunch:after {
-                animation: five 1s 0.25s linear forwards;
-            }
+	.only-on-dark {
+		display: none;
+	}
 
-            .link-instagram:hover ~ .scrunch:after {
-                animation: six 1s 0.25s linear forwards;
-            }
+	.only-on-light {
+		display: block;
+	}
 
-            .link-site:hover ~ .scrunch:after {
-                animation: seven 1s 0.25s linear forwards;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1 class="only-on-light">Light Mode</h1>
-    <h1 class="only-on-dark">Dark Mode</h1>
-</body>
+	.search-bar {
+		padding-bottom: 5px;
+		align-items: center;
+		bottom: -11px;
+		border-bottom: 1px solid #1c1c1c;
+		width: 280px;
+	}
+
+	.search {
+		font-size: 1rem;
+		width: 40px;
+		padding: 10px 0px;
+		color: #292929;
+		background-color: #f1f1f100;
+		border-style: none;
+		width: 280px;
+		height: 40px;
+		align-items: center;
+	}
+	.search:hover {
+		border-style: 2px solid #1c1c1c;
+	}
+	.search:focus {
+		filter: drop-shadow(0px 8px 8px #00000059);
+	}
+
+	.search:after {
+		filter: drop-shadow(0px 2px 2px #00000059);
+	}
+	.clock {
+		margin: 5px;
+		line-height: 22px;
+	}
+
+	#realTimeClock {
+		color: rgb(53, 53, 53);
+	}
+
+	#realTimeDate {
+                font-size: 1rem;
+		color: rgb(53, 53, 53);
+	}
+	.weather {
+		padding-top: 1em;
+	font-size: 1rem;
+	}
+	#city {
+		padding-top: 1em;
+		font-size: 1rem;
+	}
+	#temp {
+		padding-top: 1em;
+		font-size: 1rem;
+	}
+
+	h1 {
+		margin: 0;
+		padding: 0;
+	}
+
+	p {
+		margin: 0;
+		padding: 0;
+	}
+
+	
+	a {
+		line-height: 2rem;
+		color: white;
+		text-decoration: none;
+		text-align: left;
+		top: 1%;
+		left: 10%;
+		font-size: 1rem;
+	}
+
+	a:hover {
+		color: #d2926a;
+	        border-bottom: 1px solid #d2926a;
+	}
+
+	a:focus {
+		color: #d2926a;
+		     border-bottom: 2px solid #d2926a;
+	}
+
+	::-moz-focus-inner {
+		padding: 0;
+		border: 0;
+	}
+
+	:focus {
+		outline: 0;
+	}
+
+	.main-text {
+		position: sticky;
+		bottom: 5%;
+		left: 5em;
+		max-width: 100px,
+		
+	}
+
+	.section {
+		z-index: 0;
+		display: -webkit-box;
+		box-sizing: border-box;
+		min-height: 100vh;
+		min-width: 10vw;
+	}
+
+.section-1 {
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	
+}
+	
+	
+	.section-2 {
+		position: fixed;
+	bottom: 2%;
+		max-width: 100px;
+		left: 10%;
+	
+}
+
+	.main-text-medium {
+		font-size: 1rem;
+		letter-spacing: 22px;
+	}
+
+	@media (max-width: 400px) {
+		.logo {
+			width: 100vw;
+			height: 50vh;
+		}
+
+		.column-section-main {
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			flex-direction: column;
+		}
+	}
+
+	.section {
+		z-index: 0;
+		width: calc(120vw - 100px - 20em);
+		display: -webkit-box;
+		box-sizing: border-box;
+		min-height: 80vh;
+		max-width: 100px;
+	}
+
+	.column-section {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		flex-direction: column;
+	}
+
+	.col-section {
+		width: 100%;
+		max-width: 400px;
+	}
+
+	.list {
+		margin-top: 2em;
+		position: relative;
+	}
+
+	.list-item {
+		margin-top: 0.25em;
+		margin-bottom: 2em;
+	}
+
+	.list-item:last-child {
+		margin-bottom: -0.4em;
+	}
+
+	.footer-links {
+		line-height: 2.5;
+		position: relative;
+		left: 0%;
+		background-color: #20202200;
+		padding: 0px;
+	}
+
+	.footer {
+		position: absolute;
+		left: auto;
+		bottom: auto;
+		padding: 0 7.5vw 7.5vw;
+		-webkit-box-align: start;
+		align-items: flex-start;
+	}
+
+	.footer-links {
+		display: inline;
+	}
+
+	@media (hover: hover) {
+		.footer-links:nth-child(odd):hover ~ .scrunch {
+			background-color: #a1a1a1;
+		}
+
+		.footer-links:nth-child(2n):hover ~ .scrunch {
+			background-color: #3a3a3a;
+		}
+
+		.link-email:hover ~ .scrunch:after {
+			-webkit-animation: one 1s 0.25s linear forwards;
+			animation: one 1s 0.25s linear forwards;
+		}
+
+		.link-behance:hover ~ .scrunch:after {
+			-webkit-animation: two 1s 0.25s linear forwards;
+			animation: two 1s 0.25s linear forwards;
+		}
+
+		.link-dribbble:hover ~ .scrunch:after {
+			-webkit-animation: three 1s 0.25s linear forwards;
+			animation: three 1s 0.25s linear forwards;
+		}
+
+		.link-linkedin:hover ~ .scrunch:after {
+			-webkit-animation: four 1s 0.25s linear forwards;
+			animation: four 1s 0.25s linear forwards;
+		}
+
+		.link-twitter:hover ~ .scrunch:after {
+			-webkit-animation: five 1s 0.25s linear forwards;
+			animation: five 1s 0.25s linear forwards;
+		}
+
+		.link-instagram:hover ~ .scrunch:after {
+			-webkit-animation: six 1s 0.25s linear forwards;
+			animation: six 1s 0.25s linear forwards;
+		}
+
+		.link-site:hover ~ .scrunch:after {
+			-webkit-animation: seven 1s 0.25s linear forwards;
+			animation: seven 1s 0.25s linear forwards;
+		}
+	}
+}
+</style>
+	</head>
+	<body>
+		<section class="section cr-items">
+			<section class="section-1">
+					<div class="clock animate__animated animate__slideInDown">
+						<div id="realTimeClock" class="text-white"></div>
+						<div id="realTimeDate" class="text-white"></div>
+						<div id="realTimeInfo" class="text-white"></div>
+						<div class="weather"><p><span id="temp"></span>°C</p></div>
+					</div>
+
+			</section>
+			<section class="section column-section section-2 cr-items">
+				<div class="main-text main-text-medium">
+				      <div class="search-bar">
+						<form role="search" id="form" action="http://www.google.com/search" method="get">
+						<input class="search" type="search" id="query" name="q" placeholder="Search..." autofocus />
+						<button type="submit" hidden > <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
+						</button>
+					</div>
+					<div class="fav-links">
+					<a class="footer-links link-twitter" href="https://x.com/home">.Twitter</a>
+					<a class="footer-links link-reddit" href="https://www.reddit.com/">.Reddit</a>
+					<a class="footer-links link-unix-porn" href="https://www.reddit.com/r/unixporn/">.Unixporn</a>
+					<a class="footer-links link-youtube" href="https://www.youtube.com">.Youtube</a>
+					<a class="footer-links link-dribbble" href="https://github.com/john-json?tab=repositories">.Github</a>
+					<a class="footer-links link-behance" href="https://deviantart.com">.Deviantart</a>
+					<a class="footer-links link-behance" href="https://de.pinterest.com/homefeed/">.Pinterest</a>
+					</div>
+
+			
+
+				</div>
+			</section>
+		</section>
+		<script>window.onload = () => {
+	document.getElementsByTagName("body")[0].removeAttribute("class");
+};
+
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+if (prefersDarkScheme.matches) {
+	document.body.classList.add("dark-theme");
+} else {
+	document.body.classList.add("light-theme");
+}
+function updateClock() {
+	const weekday = {weekday: "short"};
+	const monthday = {day: "numeric"};
+	const dateElement = document.getElementById("realTimeDate");
+
+	const currentDate = new Date();
+	const formattedDate = currentDate.toLocaleDateString("en-EN", monthday);
+	const formattedDay = currentDate.toLocaleDateString("en-EN", weekday);
+	console.log(formattedDate); // Output: "2024-12-21" (or similar format)
+
+	const clockElement = document.getElementById("realTimeClock");
+
+	// Get current time
+	const now = new Date();
+	const hours = now.getHours().toString().padStart(2, "0");
+	const minutes = now.getMinutes().toString().padStart(2, "0");
+
+	// Format time
+	const timeString = `${hours}${minutes}`;
+	const dateString = `${formattedDate}${formattedDay}`;
+
+	// Display time
+	clockElement.textContent = timeString;
+	dateElement.textContent = dateString;
+}
+// Initialize clock and update it every second
+setInterval(updateClock, 1000);
+updateClock(); // Call immediately to avoid initial delay
+
+const searchInput = document.getElementById("search-input");
+
+searchInput.addEventListener("input", (event) => {
+	const query = event.target.value;
+	// Send AJAX request or make API call with the search query
+	// Update search results display
+});
+
+const f = document.getElementById("form");
+const q = document.getElementById("query");
+const google = "https://www.google.com/search?q=site%3A+";
+const site = "google.de";
+
+function submitted(event) {
+	event.preventDefault();
+	const url = google + site + "+" + q.value;
+	const win = window.open(url, "_blank");
+	win.focus();
+}
+
+f.addEventListener("submit", submitted);
+</script>
+<script>
+const apiKey = "026404d3de17740b166956b83f4563df";
+const cityId = "2861650";
+
+fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&lang=de&appid=${apiKey}`)
+	.then((response) => response.json())
+	.then((data) => {
+		if (!data.main || data.main.temp === undefined) {
+			console.error("Temperature data is missing.");
+			return;
+		}
+
+		const city = data.name;
+		const temp = Math.round(data.main.temp);
+		const cond = data.current.weather.main// Standard rounding works for both positive and negative
+
+		console.log(`City: ${city}, Temperature: ${temp}, Condition: ${cond}`); // Debugging
+
+		const cityElem = document.getElementById("city");
+		const tempElem = document.getElementById("temp");
+		const condElem = document.getElementById("cond");
+
+		if (cityElem) cityElem.textContent = city;
+		if (tempElem) tempElem.textContent = temp;
+		if (condElem) condElem.textContent = cond;
+	})
+	.catch((error) => console.error("API Error:", error));
+		</script>
+	</body>
 </html>
