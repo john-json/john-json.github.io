@@ -692,7 +692,6 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric
 
 		const city = data.name;
 		const temp = Math.round(data.main.temp);
-		const cond = data.current.weather.main// Standard rounding works for both positive and negative
 
 		console.log(`City: ${city}, Temperature: ${temp}`); // Debugging
 
