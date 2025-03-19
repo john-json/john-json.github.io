@@ -1,6 +1,9 @@
-<center>![Alt text](/assets/img/ilstr01_logo_icon-dark.png?raw=true "ilstr01-dark-logo")</center>
+
+![Alt text](/assets/img/ilstr01_logo_icon-dark.png?raw=true "ilstr01-dark-logo")
+
 
 # ilstr01-minimal-startpage
+
 
 Just add https://john-json.github.io as your start screen
 
