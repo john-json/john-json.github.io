@@ -1,14 +1,15 @@
 
-![Alt text](/assets/img/ilstr01_logo_icon-dark-small.png?raw=true"ilstr01-dark-logo-small")
+![Alt text](/assets/img/ilstr01_logo_icon-dark-small.png?raw=true"ilstr01-dark-logo-small") # ilstr01-minimal-startpage
 
 
-# ilstr01-minimal-startpage
 
+----------------------------------------------------------
 
 Just add https://john-json.github.io as your start screen
 
 Colors change automatically according to system color.
 
+---------------------------------------------------------
 
 Dark version:
 ![Alt text](/assets/img/ilstr01-dark.png?raw=true "ilstr01-dark")
