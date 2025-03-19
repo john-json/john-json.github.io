@@ -1,5 +1,5 @@
 
-![Alt text](/assets/img/ilstr01_logo_icon-dark.png?raw=true|90 "ilstr01-dark-logo")
+![Alt text](/assets/img/ilstr01_logo_icon-dark.png?raw=true"max-width=25%" "ilstr01-dark-logo")
 
 
 # ilstr01-minimal-startpage
