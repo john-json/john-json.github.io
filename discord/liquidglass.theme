@@ -1,0 +1,401 @@
+/* macOS 26 Tahoe Finder – Vesktop Liquid Glass Theme
+ * Drop this into Vesktop QuickCSS.
+ * Light/dark auto-follow uses Discord theme attributes (ThemeAttributes plugin recommended).
+ */
+
+/* =========================
+   Base Variables
+   ========================= */
+
+:root {
+  /* Global radius & borders */
+  --tahoe-radius-lg: 16px;
+  --tahoe-radius-md: 12px;
+  --tahoe-radius-sm: 8px;
+  --tahoe-border-subtle: 1px solid rgba(255, 255, 255, 0.18);
+
+  /* Backdrop blur strength (px) */
+  --tahoe-blur-strong: 28px;
+  --tahoe-blur-medium: 20px;
+  --tahoe-blur-soft: 14px;
+
+  /* Animation */
+  --tahoe-transition-fast: 150ms ease-out;
+  --tahoe-transition-med: 220ms ease-out;
+
+  /* Elevation */
+  --tahoe-shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.35);
+  --tahoe-shadow-subtle: 0 10px 26px rgba(0, 0, 0, 0.25);
+
+  /* Accent color (Tahoe-ish blue) */
+  --tahoe-accent: #4c8fff;
+
+  /* Sidebar width tweak to feel like Finder */
+  --tahoe-sidebar-width: 260px;
+}
+
+/* =========================
+   Light / Dark Palettes
+   Uses data-theme from ThemeAttributes / Discord.
+   ========================= */
+
+/* Light mode (macOS Tahoe light) */
+:root[data-theme="light"],
+:root.theme-light {
+  --tahoe-bg-main: #f5f7fb;
+  --tahoe-fg-main: #111111;
+  --tahoe-fg-subtle: rgba(0, 0, 0, 0.55);
+
+  /* Liquid glass for sidebar / header */
+  --tahoe-glass-tint: rgba(248, 251, 255, 0.72);
+  --tahoe-glass-highlight: rgba(255, 255, 255, 0.55);
+  --tahoe-glass-border: rgba(255, 255, 255, 0.9);
+
+  /* Content area */
+  --tahoe-content-bg: rgba(255, 255, 255, 0.92);
+  --tahoe-content-border: rgba(0, 0, 0, 0.05);
+
+  /* Selection / hover */
+  --tahoe-row-hover: rgba(102, 137, 255, 0.08);
+  --tahoe-row-active: rgba(76, 143, 255, 0.14);
+
+  /* Scrollbars */
+  --tahoe-scroll-thumb: rgba(0, 0, 0, 0.25);
+}
+
+/* Dark mode (macOS Tahoe dark) */
+:root[data-theme="dark"],
+:root.theme-dark {
+  --tahoe-bg-main: #05060a;
+  --tahoe-fg-main: #f6f6f7;
+  --tahoe-fg-subtle: rgba(255, 255, 255, 0.6);
+
+  --tahoe-glass-tint: rgba(12, 16, 28, 0.72);
+  --tahoe-glass-highlight: rgba(111, 167, 255, 0.32);
+  --tahoe-glass-border: rgba(179, 208, 255, 0.9);
+
+  --tahoe-content-bg: rgba(15, 18, 28, 0.94);
+  --tahoe-content-border: rgba(255, 255, 255, 0.06);
+
+  --tahoe-row-hover: rgba(111, 167, 255, 0.15);
+  --tahoe-row-active: rgba(111, 167, 255, 0.26);
+
+  --tahoe-scroll-thumb: rgba(255, 255, 255, 0.28);
+}
+
+/* =========================
+   Global App Background
+   ========================= */
+
+.app-2CXKsg, /* main app container */
+.appMount-2yBXZl {
+  background: radial-gradient(circle at top left,
+              rgba(111, 167, 255, 0.24),
+              transparent 55%)
+              fixed,
+              var(--tahoe-bg-main);
+  color: var(--tahoe-fg-main);
+}
+
+/* Remove default solid panels where possible */
+.app-2CXKsg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top,
+                rgba(255, 255, 255, 0.04),
+                transparent 60%);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  z-index: -1;
+}
+
+/* =========================
+   Liquid Glass – LEFT SIDEBAR (Finder-style)
+   ========================= */
+
+.sidebar-1tnWFu,           /* Server/channel sidebar wrapper */
+.guilds-2JjMmN,            /* Servers list (left edge) */
+.wrapper-1_HaEi {          /* Channel list area */
+  backdrop-filter: blur(var(--tahoe-blur-strong));
+  -webkit-backdrop-filter: blur(var(--tahoe-blur-strong));
+  background:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(0, 0, 0, 0.25) 55%,
+      rgba(111, 167, 255, 0.55));
+  background-color: var(--tahoe-glass-tint);
+  box-shadow:
+    inset 0 0 0 0.6px var(--tahoe-glass-border),
+    var(--tahoe-shadow-soft);
+  border-radius: 0 var(--tahoe-radius-lg) var(--tahoe-radius-lg) 0;
+  overflow: hidden;
+}
+
+/* Finder-like fixed width for text channels */
+.sidebar-1tnWFu .containerDefault-3GGEv_ {
+  max-width: var(--tahoe-sidebar-width);
+}
+
+/* Sidebar section headers (like Finder sidebar groups) */
+.header-3xB4vB,
+.name-28HaxV,
+.container-q97qHp {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  color: var(--tahoe-fg-subtle);
+}
+
+/* =========================
+   Channel List Rows – Tahoe Selection
+   ========================= */
+
+.containerDefault-YUSmu3,
+.wrapper-NhbLHG,
+.channel-1Shao0 {
+  border-radius: 9px;
+  margin: 1px 6px;
+  transition: background-color var(--tahoe-transition-fast),
+              transform var(--tahoe-transition-fast),
+              box-shadow var(--tahoe-transition-fast);
+}
+
+/* Hover */
+.containerDefault-YUSmu3:hover,
+.wrapper-NhbLHG:hover,
+.channel-1Shao0:hover {
+  background-color: var(--tahoe-row-hover);
+}
+
+/* Selected / unread active */
+.modeSelected-3DmyhH .containerDefault-YUSmu3,
+.modeSelected-3DmyhH,
+.selected-2TbFuo {
+  background: linear-gradient(120deg,
+              var(--tahoe-row-active),
+              rgba(76, 143, 255, 0.45));
+  box-shadow: 0 0 0 0.8px rgba(255, 255, 255, 0.3),
+              0 14px 32px rgba(0, 0, 0, 0.45);
+  transform: translateY(-0.5px);
+}
+
+/* Unread pill like soft Tahoe indicator */
+.unread-36eUEm,
+.unreadBar-3pO0tS {
+  border-radius: 999px;
+  background: var(--tahoe-accent);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4),
+              0 0 18px rgba(76, 143, 255, 0.8);
+}
+
+/* =========================
+   MAIN CHAT / CONTENT PANEL
+   ========================= */
+
+.chat-2ZfjoI,
+.chatContent-3KubbW,
+.container-2cd8Mz,
+.content-1jQy2l {
+  background: var(--tahoe-content-bg);
+  border-radius: var(--tahoe-radius-lg);
+  border: 1px solid var(--tahoe-content-border);
+  backdrop-filter: blur(var(--tahoe-blur-medium));
+  -webkit-backdrop-filter: blur(var(--tahoe-blur-medium));
+  box-shadow: var(--tahoe-shadow-subtle);
+}
+
+/* Main scroll area padding: make it feel more windowed */
+.chatContent-3KubbW {
+  margin: 10px 10px 10px 4px;
+}
+
+/* =========================
+   Header / Titlebar (Finder-like)
+   ========================= */
+
+.container-ZMc96U, /* channel header */
+.title-31SJ6t {
+  border-radius: var(--tahoe-radius-lg) var(--tahoe-radius-lg) 0 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.85),
+      rgba(255, 255, 255, 0.02));
+  background-color: var(--tahoe-glass-tint);
+  backdrop-filter: blur(var(--tahoe-blur-soft));
+  -webkit-backdrop-filter: blur(var(--tahoe-blur-soft));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Dark mode tweak for header gradient */
+:root[data-theme="dark"] .container-ZMc96U,
+:root.theme-dark .container-ZMc96U {
+  background:
+    linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.15),
+      rgba(0, 0, 0, 0.52));
+}
+
+/* Header text */
+.title-17SveM,
+.children-3xh0VB {
+  color: var(--tahoe-fg-main);
+}
+
+/* =========================
+   Message Bubbles / List
+   ========================= */
+
+.message-2CShn3,
+.cozyMessage-1DWF9U {
+  border-radius: var(--tahoe-radius-md);
+  margin: 2px 12px;
+  padding: 6px 10px;
+  background: transparent;
+  transition: background-color var(--tahoe-transition-fast),
+              transform var(--tahoe-transition-fast);
+}
+
+.message-2CShn3:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  transform: translateY(-0.3px);
+}
+
+/* Highlight reply/mention like Finder row highlight */
+.mentioned-Tre-dv,
+.replying-eZ7p5z {
+  background: radial-gradient(circle at left,
+              rgba(111, 167, 255, 0.45),
+              transparent 65%);
+}
+
+/* =========================
+   Input Bar / Text Box
+   ========================= */
+
+.form-3gdLxP,
+.channelTextArea-1FufC0 {
+  background:
+    linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.18),
+      rgba(0, 0, 0, 0.35));
+  background-color: var(--tahoe-glass-tint);
+  border-radius: 0 0 var(--tahoe-radius-lg) var(--tahoe-radius-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(var(--tahoe-blur-soft));
+  -webkit-backdrop-filter: blur(var(--tahoe-blur-soft));
+}
+
+/* Actual text box */
+.channelTextArea-1FufC0 .textArea-2CLwUE {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: var(--tahoe-radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+}
+
+/* Placeholder / text */
+.placeholder-1rCBhr {
+  color: var(--tahoe-fg-subtle);
+}
+
+/* =========================
+   Right Sidebar / Members
+   ========================= */
+
+.container-2o3qEW,
+.membersWrap-3NUR2t {
+  background: radial-gradient(circle at top right,
+              rgba(111, 167, 255, 0.3),
+              transparent 60%);
+  background-color: rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(var(--tahoe-blur-medium));
+  -webkit-backdrop-filter: blur(var(--tahoe-blur-medium));
+  border-radius: var(--tahoe-radius-lg) 0 0 var(--tahoe-radius-lg);
+  border-left: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+/* Member rows */
+.member-2gU6Ar,
+.layout-1qmrhw {
+  border-radius: 999px;
+  padding: 4px 8px;
+  margin: 1px 6px;
+}
+.member-2gU6Ar:hover .layout-1qmrhw {
+  background-color: var(--tahoe-row-hover);
+}
+
+/* =========================
+   User Panel (bottom left)
+   ========================= */
+
+.panels-3wFtMD,
+.container-YkUktl {
+  background:
+    linear-gradient(135deg,
+      rgba(0, 0, 0, 0.55),
+      rgba(111, 167, 255, 0.5));
+  backdrop-filter: blur(var(--tahoe-blur-soft));
+  -webkit-backdrop-filter: blur(var(--tahoe-blur-soft));
+  border-radius: var(--tahoe-radius-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* =========================
+   Scrollbars
+   ========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--tahoe-scroll-thumb);
+  border-radius: 999px;
+}
+
+/* =========================
+   Small Polishes
+   ========================= */
+
+/* Remove Discord harsh borders */
+.container-1eFtFS,
+.contentRegionScroller-2_GT_N,
+.standardSidebarView-E9Pc3j {
+  background: transparent;
+}
+
+/* Settings “window” */
+.layer-86YKbF[aria-label="USER_SETTINGS"],
+.layer-86YKbF[aria-label="App Settings"] {
+  background: var(--tahoe-content-bg);
+  border-radius: var(--tahoe-radius-lg);
+  border: 1px solid var(--tahoe-content-border);
+  box-shadow: var(--tahoe-shadow-soft);
+}
+
+/* Buttons with Tahoe accent */
+.button-1EGGcP,
+.lookFilled-1H2Jvj.colorBrand-2M3O3N {
+  border-radius: 999px;
+  background: linear-gradient(135deg,
+              var(--tahoe-accent),
+              #6ca1ff);
+  box-shadow: 0 12px 25px rgba(76, 143, 255, 0.55);
+}
+.button-1EGGcP:hover,
+.lookFilled-1H2Jvj.colorBrand-2M3O3N:hover {
+  filter: brightness(1.05);
+  transform: translateY(-0.5px);
+}
+
+/* Input focus ring like macOS */
+.inputDefault-3FGxgL:focus,
+.input-2g-os5:focus {
+  box-shadow: 0 0 0 2px rgba(76, 143, 255, 0.6);
+  border-color: transparent;
+}
