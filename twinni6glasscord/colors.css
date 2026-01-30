@@ -1,0 +1,150 @@
+/* Tahoe Finder Colors – Dark/Light glass palettes */
+
+@property --colors {
+  syntax: 'off | on';
+  inherits: false;
+  initial-value: on;
+}
+
+:root {
+  /* Glass vars */
+  --tahoe-radius-xl: 20px;
+  --tahoe-radius-lg: 16px;
+  --tahoe-radius-md: 12px;
+  --tahoe-blur: 32px;
+  --tahoe-glass-shadow: 0 28px 68px rgba(0, 0, 0, 0.75),
+                        inset 0 0 0 0.8px hsla(220, 95%, 98%, 0.4);
+}
+
+/* Dark mode (default Tahoe) */
+:root[data-theme="dark"],
+:root.theme-dark {
+  --tahoe-glass-bg: rgba(8, 13, 32, 0.92);
+  --tahoe-glass-highlight: rgba(255, 255, 255, 0.16);
+  --tahoe-glass-border: rgba(255, 255, 255, 0.32);
+  --tahoe-scroll-thumb: rgba(255, 255, 255, 0.28);
+
+  --text-0: #ffffff;
+  --text-1: #f8faff;
+  --text-2: #e2eaff;
+  --text-3: #c5d3ff;
+  --text-4: #9ba8d8;
+  --text-5: #6f7ba3;
+
+  --bg-1: rgba(4, 7, 18, 0.96);
+  --bg-2: rgba(5, 9, 22, 0.92);
+  --bg-3: rgba(6, 11, 26, 0.90);
+  --bg-4: rgba(3, 5, 14, 0.94);
+  --hover: rgba(133, 171, 255, 0.14);
+  --active: rgba(133, 171, 255, 0.26);
+  --message-hover: rgba(255, 255, 255, 0.04);
+
+  --accent-1: #b3d0ff;
+  --accent-2: #91c1ff;
+  --accent-3: #6faeff;
+  --accent-4: #4d96f7;
+  --accent-5: #3378e6;
+  --accent-new: #6faeff;
+
+  --online: #5fd88a;
+  --dnd: #ff727f;
+  --idle: #ffd466;
+  --streaming: #c78dff;
+  --offline: #8a94b3;
+
+  --border-light: hsla(220, 80%, 90%, 0.20);
+  --border: hsla(220, 80%, 85%, 0.32);
+  --button-border: hsla(220, 80%, 90%, 0.42);
+}
+
+/* Light mode */
+:root[data-theme="light"],
+:root.theme-light {
+  --tahoe-glass-bg: rgba(248, 251, 255, 0.88);
+  --tahoe-glass-highlight: rgba(255, 255, 255, 0.72);
+  --tahoe-glass-border: rgba(255, 255, 255, 0.92);
+  --tahoe-scroll-thumb: rgba(0, 0, 0, 0.22);
+
+  --text-0: #0a0d1e;
+  --text-1: #111623;
+  --text-2: #2d344d;
+  --text-3: #4a5577;
+  --text-4: #6b7590;
+  --text-5: #8a94ad;
+
+  --bg-1: rgba(255, 255, 255, 0.92);
+  --bg-2: rgba(250, 252, 255, 0.88);
+  --bg-3: rgba(245, 248, 255, 0.86);
+  --bg-4: rgba(240, 244, 252, 0.90);
+  --hover: rgba(102, 137, 255, 0.10);
+  --active: rgba(102, 137, 255, 0.18);
+  --message-hover: rgba(0, 0, 0, 0.02);
+
+  --accent-1: #4c8aff;
+  --accent-2: #5a96ff;
+  --accent-3: #68a6ff;
+  --accent-4: #76b6ff;
+  --accent-5: #84c6ff;
+  --accent-new: #68a6ff;
+
+  --online: #4ec27f;
+  --dnd: #f15e6a;
+  --idle: #f1c453;
+  --streaming: #b971f0;
+  --offline: #a0a9c0;
+
+  --border-light: hsla(220, 40%, 20%, 0.18);
+  --border: hsla(220, 40%, 15%, 0.28);
+  --button-border: hsla(220, 40%, 10%, 0.36);
+}
+
+/* Apply to Discord tokens */
+@container root style(--colors: on) {
+  body,
+  .theme-dark:not(.custom-user-profile-theme),
+  .theme-light:not(.custom-user-profile-theme) {
+    --background-base-low: var(--bg-4);
+    --background-base-lower: var(--bg-4);
+    --background-base-lowest: var(--bg-4);
+    --background-secondary-alt: var(--bg-3);
+    --background-surface-high: var(--bg-3);
+    --background-surface-higher: var(--bg-3);
+    --background-surface-highest: var(--bg-3);
+    --background-mod-muted: var(--hover);
+    --background-mod-normal: var(--bg-2);
+    --background-mod-strong: var(--bg-1);
+    --background-mod-subtle: var(--hover);
+    --background-brand: var(--accent-2);
+    --background-feedback-info: color-mix(in hsl, var(--accent-2), transparent 85%);
+
+    --border-muted: var(--border-light);
+    --border-normal: var(--border);
+    --border-strong: var(--border);
+    --border-subtle: var(--border);
+
+    --channels-default: var(--text-4);
+    --channel-icon: var(--text-4);
+    --channel-text-area-placeholder: var(--text-5);
+
+    --chat-background-default: var(--bg-3);
+    --chat-border: transparent;
+
+    --text-default: var(--text-3);
+    --text-link: var(--accent-1);
+    --text-strong: var(--text-2);
+    --text-subtle: var(--text-4);
+    --text-muted: var(--text-5);
+
+    --mention-background: color-mix(in hsl, var(--accent-2), transparent 88%);
+    --mention-foreground: var(--accent-1);
+    --message-highlight-background-default: color-mix(in hsl, var(--text-3), transparent 90%);
+    --message-highlight-background-hover: color-mix(in hsl, var(--text-3), transparent 94%);
+
+    --scrollbar-auto-thumb: var(--tahoe-scroll-thumb);
+    --scrollbar-thin-thumb: var(--tahoe-scroll-thumb);
+  }
+}
+
+::placeholder {
+  color: var(--text-5);
+}
