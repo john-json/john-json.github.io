@@ -1,0 +1,42 @@
+/* Tahoe micro-animations */
+
+:root {
+  --glass-float: 0.2s cubic-bezier(0.34, 0.16, 0.3, 1.1);
+}
+
+._2ea32c412048f708-wrapper:hover,
+._972a0d22c8afa7f0-interactive:hover,
+._5126c0cd07f243a0-message:hover {
+  transform: translateY(-0.8px) scale(1.002);
+}
+
+._0f481cbbd7530492-newMessagesBar {
+  animation: tahoe-pill 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes tahoe-pill {
+  0% { transform: scale(0.95) translateY(4px); opacity: 0; }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Header/titlebar shine */
+.f75fb00fb7356cbe-subtitleContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent);
+  animation: tahoe-shine 3s infinite;
+}
+
+@keyframes tahoe-shine {
+  0%, 100% { opacity: 0; transform: translateX(-100%); }
+  10%, 90% { opacity: 1; }
+  100% { transform: translateX(100%); }
+}
