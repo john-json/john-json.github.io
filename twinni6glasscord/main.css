@@ -25,7 +25,7 @@
 /* Dark mode (default Tahoe) */
 :root[data-theme="dark"],
 :root.theme-dark {
-  --tahoe-glass-bg: rgba(8, 13, 32, 0.92);
+  --tahoe-glass-bg: rgba(24, 24, 24, 0.92);
   --tahoe-glass-highlight: rgba(255, 255, 255, 0.16);
   --tahoe-glass-border: rgba(255, 255, 255, 0.32);
   --tahoe-scroll-thumb: rgba(255, 255, 255, 0.28);
@@ -36,9 +36,9 @@
   --text-4: #9ba8d8;
   --text-5: #6f7ba3;
   --bg-1: rgba(26, 26, 26, 1);
-  --bg-2: rgba(34, 34, 34, 0.92);
-  --bg-3: rgba(26, 26, 26, 0.90);
-  --bg-4: rgba(3, 5, 14, 0.94);
+  --bg-2: rgba(34, 34, 34, 1);
+  --bg-3: rgba(26, 26, 26, 1);
+  --bg-4: rgba(26, 26, 26, 1);
   --hover: rgba(133, 171, 255, 0.14);
   --active: rgba(133, 171, 255, 0.26);
   --message-hover: rgba(255, 255, 255, 0.04);
