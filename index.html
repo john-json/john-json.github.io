@@ -1,485 +1,1485 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Start</title>
 
-  /* ── Light mode ── */
-  :root {
-    --bg: #f0eeeb;
-    --glass-bg: rgba(255,255,255,0.55);
-    --glass-border: rgba(0,0,0,0.08);
-    --glass-shadow: 0 4px 32px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-    --input-bg: rgba(0,0,0,0.055);
-    --input-border: rgba(0,0,0,0.10);
-    --input-focus-border: rgba(0,0,0,0.22);
-    --text: #1a1917;
-    --text-muted: rgba(26,25,23,0.38);
-    --text-date: rgba(26,25,23,0.28);
-    --sug-hover: rgba(0,0,0,0.06);
-    --link-hover: rgba(0,0,0,0.05);
-    --icon-filter: none;
-    --clock-hh: #1a1917;
-    --clock-mm: rgba(26,25,23,0.35);
-    --divider: rgba(0,0,0,0.07);
-  }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  /* ── Dark mode ── */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #111110;
-      --glass-bg: rgba(28,27,25,0.72);
-      --glass-border: rgba(255,255,255,0.07);
-      --glass-shadow: 0 4px 40px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
-      --input-bg: rgba(0,0,0,0.35);
-      --input-border: rgba(255,255,255,0.07);
-      --input-focus-border: rgba(255,255,255,0.18);
-      --text: #e8e6e3;
-      --text-muted: rgba(232,230,227,0.40);
-      --text-date: rgba(232,230,227,0.22);
-      --sug-hover: rgba(255,255,255,0.07);
-      --link-hover: rgba(255,255,255,0.06);
-      --icon-filter: none;
-      --clock-hh: #e8e6e3;
-      --clock-mm: rgba(232,230,227,0.30);
-      --divider: rgba(255,255,255,0.06);
-    }
-  }
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  html, body {
-    height: 100%;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    transition: background 0.3s ease;
-  }
+      :root {
+        color-scheme: light dark;
 
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100dvh;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-  }
+        --bg: #efede9;
+        --text: #171717;
+        --text-muted: rgba(23, 23, 23, 0.28);
+        --text-soft: rgba(23, 23, 23, 0.54);
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse 70% 55% at 50% 50%, transparent 35%, rgba(0,0,0,0.18) 100%);
-    pointer-events: none;
-    z-index: 0;
-  }
+        --glass-bg: rgba(255, 255, 255, 0.58);
+        --glass-border: rgba(0, 0, 0, 0.07);
+        --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
-  @media (prefers-color-scheme: dark) {
-    body::before {
-      background: radial-gradient(ellipse 70% 55% at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%);
-    }
-  }
+        --input-bg: rgba(255, 255, 255, 0.88);
+        --input-focus-bg: rgba(219, 219, 219, 0.98);
+        --input-border: rgba(0, 0, 0, 0.06);
+        --input-focus-border: rgba(0, 0, 0, 0.12);
+        --search-icon: rgba(23, 23, 23, 0.5);
+        --search-text: #171717;
 
-  .page {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 640px;
-  }
+        --divider: rgba(0, 0, 0, 0.06);
 
-  /* ── Date + Weather header ── */
-  .meta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    user-select: none;
-  }
+        --tile-bg: rgba(255, 255, 255, 0.18);
+        --tile-hover: rgba(255, 255, 255, 0.26);
+        --tile-border: rgba(0, 0, 0, 0.06);
 
-  .meta-date {
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: lowercase;
-    color: var(--text-date);
-  }
+        --clock-strong: #151515;
+        --clock-soft: rgba(21, 21, 21, 0.3);
 
-  .meta-weather {
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    text-transform: lowercase;
-    color: var(--text-muted);
-  }
+        --radius-card: 22px;
+        --radius-search: 50px;
+        --radius-tile: 13px;
+        --radius-modal: 22px;
 
-  /* ── Glass card (search + icons combined) ── */
-  .card {
-    width: 100%;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 1.25rem;
-    box-shadow: var(--glass-shadow);
-    backdrop-filter: blur(20px) saturate(1.4);
-    -webkit-backdrop-filter: blur(20px) saturate(1.4);
-    padding: 0.85rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* ── Search ── */
-  .search-wrap {
-    position: relative;
-    width: 100%;
-  }
+        --wallpaper-image: none;
+        --wallpaper-blur: 0px;
+        --wallpaper-dim: 0.18;
+        --card-blur: 20px;
+      }
 
-  .search-wrap .search-icon {
-    position: absolute;
-    left: 0.85rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    pointer-events: none;
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-  }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1c1c1c;
+          --text: #f4f4f3;
+          --text-muted: rgba(244, 244, 243, 0.26);
+          --text-soft: rgba(244, 244, 243, 0.52);
 
-  .search-input {
-    width: 100%;
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    border-radius: 0.75rem;
-    padding: 0.72rem 1rem 0.72rem 2.45rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--text);
-    outline: none;
-    transition: border-color 160ms ease, background 160ms ease;
-  }
+          --glass-bg: rgba(35, 35, 35, 0.56);
+          --glass-border: rgba(255, 255, 255, 0.07);
+          --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
 
-  .search-input::placeholder { color: var(--text-muted); }
+          --input-bg: rgba(40, 40, 40, 1);
+          --input-focus-bg: #1c1c1c;
+          --input-border: rgba(255, 255, 255, 0.07);
+          --input-focus-border: rgba(255, 255, 255, 0.13);
+          --search-icon: rgba(255, 255, 255, 0.9);
+          --search-text: #f4f4f3;
 
-  .search-input:focus {
-    border-color: var(--input-focus-border);
-    background: var(--input-bg);
-  }
+          --divider: rgba(255, 255, 255, 0.05);
 
-  /* suggestions */
-  .suggestions {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0; right: 0;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 0.9rem;
-    overflow: hidden;
-    z-index: 50;
-    display: none;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: var(--glass-shadow);
-  }
+          --tile-bg: rgba(255, 255, 255, 0);
+          --tile-hover: rgba(255, 255, 255, 0.06);
+          --tile-border: rgba(255, 255, 255, 0.055);
 
-  .suggestions.open { display: block; }
+          --clock-strong: #f4f4f3;
+          --clock-soft: rgba(244, 244, 243, 0.28);
 
-  .suggestion-item {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.58rem 0.9rem;
-    font-size: 0.84rem;
-    color: var(--text);
-    cursor: pointer;
-    transition: background 100ms ease;
-  }
+          --wallpaper-dim: 0.34;
+        }
+      }
 
-  .suggestion-item svg { flex-shrink:0; color: var(--text-muted); width:13px; height:13px; }
-  .suggestion-item:hover, .suggestion-item.active { background: var(--sug-hover); }
+      html,
+      body {
+        height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
 
-  /* ── Divider ── */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: var(--divider);
-    margin: 0.75rem 0;
-  }
+      body {
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        overflow: hidden;
+        position: relative;
+      }
 
-  /* ── Icon links ── */
-  .links {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0 0.1rem;
-  }
+      body::after {
+        content: "";
+        position: fixed;
+        inset: -24px;
+        z-index: 0;
+        pointer-events: none;
+        background-image: var(--wallpaper-image);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: blur(var(--wallpaper-blur));
+        transform: scale(1.06);
+        opacity: 1;
+      }
 
-  .link-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.32rem;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 0.6rem;
-    padding: 0.45rem 0.5rem;
-    transition: background 150ms ease, transform 150ms ease;
-  }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(
+            rgba(0, 0, 0, var(--wallpaper-dim)),
+            rgba(0, 0, 0, var(--wallpaper-dim))
+          ),
+          radial-gradient(
+            ellipse 72% 58% at 50% 50%,
+            transparent 0%,
+            transparent 34%,
+            rgba(0, 0, 0, 0.22) 100%
+          );
+        z-index: 0;
+      }
 
-  .link-item:hover {
-    background: var(--link-hover);
-    transform: translateY(-1px);
-  }
+      @media (prefers-color-scheme: dark) {
+        body::before {
+          background:
+            linear-gradient(
+              rgba(0, 0, 0, var(--wallpaper-dim)),
+              rgba(0, 0, 0, var(--wallpaper-dim))
+            ),
+            radial-gradient(
+              ellipse 72% 58% at 50% 50%,
+              transparent 0%,
+              transparent 20%,
+              rgba(0, 0, 0, 0.56) 100%
+            );
+        }
+      }
 
-  .link-item:active { transform: translateY(0); }
+      .page {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        animation: pageIn 700ms var(--ease);
+      }
 
-  .link-icon {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+      .card {
+        width: 100%;
+        max-width: 620px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-card);
+        box-shadow: var(--glass-shadow);
+        backdrop-filter: blur(var(--card-blur)) saturate(1.06);
+        -webkit-backdrop-filter: blur(var(--card-blur)) saturate(1.06);
+        padding: 10px;
+      }
 
-  .link-icon img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    display: block;
-  }
+      .search-wrap {
+        position: relative;
+        width: 100%;
+      }
 
-  /* Light mode: invert white icons so they show on light bg */
-  @media (prefers-color-scheme: light) {
-    .link-icon img.invert-light {
-      filter: invert(1) brightness(0.15);
-    }
-  }
-  @media (prefers-color-scheme: dark) {
-    .link-icon img.invert-dark {
-      filter: invert(1);
-    }
-  }
+      .search-wrap .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--search-icon);
+        pointer-events: none;
+        width: 17px;
+        height: 17px;
+        z-index: 2;
+      }
 
-  .link-label {
-    font-size: 0.6rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-  }
+      .search-input {
+        width: 100%;
+        height: 48px;
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        border-radius: var(--radius-search);
+        padding: 0 15px 0 38px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 450;
+        letter-spacing: -0.01em;
+        color: var(--search-text);
+        outline: none;
+        transition:
+          border-color 160ms var(--ease),
+          background 160ms var(--ease),
+          transform 160ms var(--ease);
+      }
 
-  /* ── Clock ── */
-  .clock {
-    position: fixed;
-    bottom: 2rem;
-    right: 2.4rem;
-    display: flex;
-    align-items: baseline;
-    line-height: 1;
-    user-select: none;
-    z-index: 1;
-  }
+      .search-input::placeholder {
+        color: var(--text-soft);
+      }
 
-  .clock-hh {
-    font-size: clamp(3.2rem, 5.5vw, 5rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    color: var(--clock-hh);
-    line-height: 1;
-  }
+      .search-input:focus {
+        border-color: var(--input-focus-border);
+        background: var(--input-focus-bg);
+      }
+      .search-tools {
+        position: absolute;
+        top: 50%;
+        right: 11px;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: auto;
+        padding-top: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms var(--ease);
+        z-index: 3;
+      }
 
-  .clock-mm {
-    font-size: clamp(3.2rem, 5.5vw, 5rem);
-    font-weight: 300;
-    letter-spacing: -0.04em;
-    color: var(--clock-mm);
-    line-height: 1;
-  }
-</style>
-</head>
-<body>
+      .card:hover .search-tools,
+      .search-tools.force-show,
+      .search-wrap:focus-within .search-tools {
+        opacity: 1;
+        pointer-events: auto;
+      }
 
-<div class="page">
+      .bg-trigger {
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--text-soft);
+        cursor: pointer;
+        transition:
+          background 150ms var(--ease),
+          border-color 150ms var(--ease),
+          color 150ms var(--ease),
+          transform 150ms var(--ease);
+      }
 
-  <!-- Date + weather -->
-  <div class="meta">
-    <div class="meta-date" id="meta-date">sun seventeenth</div>
-    <div class="meta-weather">+4°c &nbsp;·&nbsp; feels like +5°c &nbsp;·&nbsp; sunny</div>
-  </div>
+      .bg-trigger:hover {
+        background: var(--tile-hover);
+        border-color: var(--tile-border);
+        color: var(--text);
+        transform: translateY(-1px);
+      }
 
-  <!-- Glass card -->
-  <div class="card">
+      .bg-trigger:active {
+        transform: translateY(0);
+      }
 
-    <!-- Search -->
-    <div class="search-wrap">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-      <input
-        class="search-input"
-        id="search"
-        type="text"
-        placeholder="Search..."
-        autocomplete="off"
-        spellcheck="false"
-      >
-      <div class="suggestions" id="suggestions"></div>
+      .bg-trigger svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .suggestions {
+        display: none !important;
+      }
+
+      .divider {
+        width: 100%;
+        height: 1px;
+        background: var(--divider);
+        margin: 10px 0 8px;
+      }
+
+      .links {
+        display: flex;
+        align-items: left;
+        justify-content: left;
+        gap: 18px;
+        flex-wrap: wrap;
+        padding: 6px 4px 2px;
+      }
+
+      .link-item {
+        width: 22px;
+        height: 22px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 11px;
+        background: var(--tile-bg);
+        border: 1px solid var(--tile-border);
+        transition:
+          background 150ms var(--ease),
+          transform 150ms var(--ease),
+          border-color 150ms var(--ease);
+      }
+
+      .link-item:hover {
+        background: var(--tile-hover);
+        transform: translateY(-1px);
+      }
+
+      .link-item:active {
+        transform: translateY(0);
+      }
+
+      .link-icon {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .link-icon img {
+        width: 17px;
+        height: 17px;
+        object-fit: contain;
+        display: block;
+      }
+
+      .link-label {
+        display: none;
+      }
+
+      @media (prefers-color-scheme: light) {
+        .link-icon img.invert-light {
+          filter: invert(1) brightness(0.15);
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .link-icon img.invert-dark {
+          filter: invert(1);
+        }
+      }
+
+      .meta-bottom {
+        position: fixed;
+        right: 2.4rem;
+        bottom: calc(2rem + clamp(3.2rem, 5.5vw, 6rem) + 0.5rem);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        gap: 0;
+        user-select: none;
+        pointer-events: none;
+        z-index: 1;
+        text-transform: uppercase;
+        line-height: 0.92;
+      }
+
+      .meta-date,
+      .meta-weather {
+        display: flex;
+        align-items: baseline;
+        justify-content: flex-end;
+        gap: 0;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .meta-date-strong,
+      .meta-weather-strong {
+        font-size: clamp(2.05rem, 1.6vw, 1.45rem);
+        font-weight: 700;
+        letter-spacing: -0.085em;
+        color: var(--clock-strong);
+        line-height: 1;
+      }
+
+      .meta-date-soft,
+      .meta-weather-soft {
+        font-size: clamp(2.05rem, 1.6vw, 1.45rem);
+        font-weight: 300;
+        letter-spacing: -0.085em;
+        color: var(--clock-soft);
+        line-height: 1.2;
+      }
+
+      .clock {
+        position: fixed;
+        bottom: 2rem;
+        right: 2.4rem;
+        display: flex;
+        align-items: baseline;
+        line-height: 1;
+        user-select: none;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .clock-hh {
+        font-size: clamp(4.2rem, 5.5vw, 6rem);
+        font-weight: 700;
+        letter-spacing: -0.085em;
+        color: var(--clock-strong);
+        line-height: 1;
+      }
+
+      .clock-mm {
+        font-size: clamp(4.2rem, 5.5vw, 6rem);
+        font-weight: 300;
+        letter-spacing: -0.085em;
+        color: var(--clock-soft);
+        line-height: 1;
+      }
+
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        background: rgba(0, 0, 0, 0.26);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms var(--ease);
+      }
+
+      .modal-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .bg-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: min(92vw, 430px);
+        transform: translate(-50%, -46%) scale(0.98);
+        z-index: 31;
+        opacity: 0;
+        pointer-events: none;
+        border-radius: var(--radius-modal);
+        border: 1px solid var(--glass-border);
+        background: var(--glass-bg);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(26px) saturate(1.1);
+        -webkit-backdrop-filter: blur(26px) saturate(1.1);
+        padding: 16px;
+        transition:
+          opacity 180ms var(--ease),
+          transform 180ms var(--ease);
+      }
+
+      .bg-modal.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .modal-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--text);
+      }
+
+      .modal-close {
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-soft);
+        border: 1px solid transparent;
+        transition:
+          background 150ms var(--ease),
+          border-color 150ms var(--ease),
+          color 150ms var(--ease);
+      }
+
+      .modal-close:hover {
+        background: var(--tile-hover);
+        border-color: var(--tile-border);
+        color: var(--text);
+      }
+
+      .modal-close svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .modal-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .modal-label {
+        font-size: 0.76rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+      }
+
+      .modal-text {
+        width: 100%;
+        height: 42px;
+        border-radius: 14px;
+        border: 1px solid var(--input-border);
+        background: var(--input-bg);
+        color: var(--search-text);
+        padding: 0 13px;
+        outline: none;
+        font-size: 0.9rem;
+      }
+
+      .modal-text:focus {
+        border-color: var(--input-focus-border);
+        background: var(--input-focus-bg);
+      }
+
+      .modal-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .modal-button {
+        flex: 1;
+        height: 40px;
+        border-radius: 14px;
+        border: 1px solid var(--tile-border);
+        background: var(--tile-bg);
+        color: var(--text);
+        font-size: 0.86rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        transition:
+          background 150ms var(--ease),
+          border-color 150ms var(--ease),
+          transform 150ms var(--ease);
+      }
+
+      .modal-button:hover {
+        background: var(--tile-hover);
+        transform: translateY(-1px);
+      }
+
+      .modal-button:active {
+        transform: translateY(0);
+      }
+
+      .modal-button.primary {
+        background: var(--input-bg);
+      }
+
+      .slider-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .blur-slider {
+        flex: 1;
+        accent-color: var(--text);
+      }
+
+      .slider-value {
+        min-width: 42px;
+        text-align: right;
+        font-size: 0.8rem;
+        color: var(--text-soft);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .modal-note {
+        font-size: 0.78rem;
+        line-height: 1.35;
+        color: var(--text-soft);
+      }
+      .thumb-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .thumb-item,
+      .upload-tile {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 14px;
+        border: 1px solid var(--tile-border);
+        background: var(--tile-bg);
+        transition:
+          background 150ms var(--ease),
+          border-color 150ms var(--ease),
+          transform 150ms var(--ease),
+          box-shadow 150ms var(--ease);
+      }
+
+      .thumb-item:hover,
+      .upload-tile:hover {
+        background: var(--tile-hover);
+        transform: translateY(-1px);
+      }
+
+      .thumb-item.active {
+        border-color: var(--text-soft);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+      }
+
+      .thumb-button,
+      .upload-button {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        color: inherit;
+        font: inherit;
+      }
+
+      .thumb-button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .upload-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: var(--text-soft);
+      }
+
+      .upload-button svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .upload-button span {
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .hidden-file-input {
+        display: none;
+      }
+
+      .thumb-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .thumb-item,
+      .upload-tile {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 14px;
+        border: 1px solid var(--tile-border);
+        background: var(--tile-bg);
+        transition:
+          background 150ms var(--ease),
+          border-color 150ms var(--ease),
+          transform 150ms var(--ease),
+          box-shadow 150ms var(--ease);
+      }
+
+      .thumb-item:hover,
+      .upload-tile:hover {
+        background: var(--tile-hover);
+        transform: translateY(-1px);
+      }
+
+      .thumb-item.active {
+        border-color: var(--text-soft);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+      }
+
+      .thumb-button,
+      .upload-button {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        color: inherit;
+        font: inherit;
+      }
+
+      .thumb-button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .upload-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: var(--text-soft);
+      }
+
+      .upload-button svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .upload-button span {
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .hidden-file-input {
+        display: none;
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 1.2rem;
+        }
+
+        .card {
+          max-width: 100%;
+        }
+
+        .meta-bottom {
+          right: 1rem;
+          bottom: calc(1rem + clamp(2.7rem, 12vw, 4rem) + 0.3rem);
+        }
+
+        .meta-date-strong,
+        .meta-date-soft,
+        .meta-weather-strong,
+        .meta-weather-soft {
+          font-size: 0.95rem;
+        }
+
+        .clock {
+          right: 1rem;
+          bottom: 1rem;
+        }
+
+        .clock-hh,
+        .clock-mm {
+          font-size: clamp(2.7rem, 12vw, 4rem);
+        }
+      }
+
+      @keyframes pageIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.988);
+          filter: blur(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="card">
+        <div class="search-wrap">
+          <svg
+            class="search-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+
+          <div class="search-tools" id="search-tools">
+            <button
+              class="bg-trigger"
+              id="bg-trigger"
+              type="button"
+              aria-label="Change background"
+              title="Change background"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 3v4" />
+                <path d="M12 17v4" />
+                <path d="M4.93 4.93l2.83 2.83" />
+                <path d="M16.24 16.24l2.83 2.83" />
+                <path d="M3 12h4" />
+                <path d="M17 12h4" />
+                <path d="M4.93 19.07l2.83-2.83" />
+                <path d="M16.24 7.76l2.83-2.83" />
+                <circle cx="12" cy="12" r="3.5" />
+              </svg>
+            </button>
+          </div>
+
+          <input
+            class="search-input"
+            id="search"
+            type="text"
+            placeholder="Search..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+
+          <div class="suggestions" id="suggestions"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="links">
+          <a
+            class="link-item"
+            href="https://reddit.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Reddit"
+            title="Reddit"
+          >
+            <div class="link-icon">
+              <img
+                src="https://cdn.simpleicons.org/reddit/FF4500"
+                alt="Reddit"
+                width="17"
+                height="17"
+                loading="lazy"
+              />
+            </div>
+          </a>
+
+          <a
+            class="link-item"
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <div class="link-icon">
+              <img
+                src="https://cdn.simpleicons.org/github/000000"
+                alt="GitHub"
+                width="17"
+                height="17"
+                loading="lazy"
+                class="invert-dark"
+              />
+            </div>
+          </a>
+
+          <a
+            class="link-item"
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+            title="YouTube"
+          >
+            <div class="link-icon">
+              <img
+                src="https://cdn.simpleicons.org/youtube/FF0000"
+                alt="YouTube"
+                width="17"
+                height="17"
+                loading="lazy"
+              />
+            </div>
+          </a>
+
+          <a
+            class="link-item"
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X"
+            title="X"
+          >
+            <div class="link-icon">
+              <img
+                src="https://cdn.simpleicons.org/x/000000"
+                alt="X"
+                width="17"
+                height="17"
+                loading="lazy"
+                class="invert-dark"
+              />
+            </div>
+          </a>
+
+          <a
+            class="link-item"
+            href="https://discord.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Discord"
+            title="Discord"
+          >
+            <div class="link-icon">
+              <img
+                src="https://cdn.simpleicons.org/discord/5865F2"
+                alt="Discord"
+                width="17"
+                height="17"
+                loading="lazy"
+              />
+            </div>
+          </a>
+
+          <a
+            class="link-item"
+            href="https://figma.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Figma"
+            title="Figma"
+          >
+            <div class="link-icon">
+              <img
+                src="https://cdn.simpleicons.org/figma/F24E1E"
+                alt="Figma"
+                width="17"
+                height="17"
+                loading="lazy"
+              />
+            </div>
+          </a>
+
+          <a
+            class="link-item"
+            href="https://open.spotify.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Spotify"
+            title="Spotify"
+          >
+            <div class="link-icon">
+              <img
+                src="https://cdn.simpleicons.org/spotify/1DB954"
+                alt="Spotify"
+                width="17"
+                height="17"
+                loading="lazy"
+              />
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div class="divider"></div>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
 
-    <!-- Links -->
-    <div class="links">
-      <a class="link-item" href="https://reddit.com" target="_blank" rel="noopener noreferrer">
-        <div class="link-icon"><img src="https://cdn.simpleicons.org/reddit/FF4500" alt="Reddit" width="24" height="24" loading="lazy"></div>
-        <span class="link-label">Reddit</span>
-      </a>
-      <a class="link-item" href="https://github.com" target="_blank" rel="noopener noreferrer">
-        <div class="link-icon"><img src="https://cdn.simpleicons.org/github/000000" alt="GitHub" width="24" height="24" loading="lazy" class="invert-dark"></div>
-        <span class="link-label">GitHub</span>
-      </a>
-      <a class="link-item" href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-        <div class="link-icon"><img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" width="24" height="24" loading="lazy"></div>
-        <span class="link-label">YouTube</span>
-      </a>
-      <a class="link-item" href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-        <div class="link-icon"><img src="https://cdn.simpleicons.org/x/000000" alt="X" width="24" height="24" loading="lazy" class="invert-dark"></div>
-        <span class="link-label">X</span>
-      </a>
-      <a class="link-item" href="https://vercel.com" target="_blank" rel="noopener noreferrer">
-        <div class="link-icon"><img src="https://cdn.simpleicons.org/vercel/000000" alt="Vercel" width="24" height="24" loading="lazy" class="invert-dark"></div>
-        <span class="link-label">Vercel</span>
-      </a>
-      <a class="link-item" href="https://discord.com" target="_blank" rel="noopener noreferrer">
-        <div class="link-icon"><img src="https://cdn.simpleicons.org/discord/5865F2" alt="Discord" width="24" height="24" loading="lazy"></div>
-        <span class="link-label">Discord</span>
-      </a>
-      <a class="link-item" href="https://figma.com" target="_blank" rel="noopener noreferrer">
-        <div class="link-icon"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma" width="24" height="24" loading="lazy"></div>
-        <span class="link-label">Figma</span>
-      </a>
-      <a class="link-item" href="https://open.spotify.com" target="_blank" rel="noopener noreferrer">
-        <div class="link-icon"><img src="https://cdn.simpleicons.org/spotify/1DB954" alt="Spotify" width="24" height="24" loading="lazy"></div>
-        <span class="link-label">Spotify</span>
-      </a>
-      <a class="link-item" href="https://news.ycombinator.com" target="_blank" rel="noopener noreferrer">
-        <div class="link-icon"><img src="https://cdn.simpleicons.org/ycombinator/FF6600" alt="HN" width="24" height="24" loading="lazy"></div>
-        <span class="link-label">HN</span>
-      </a>
+    <div
+      class="bg-modal"
+      id="bg-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bg-modal-title"
+    >
+      <div class="modal-header">
+        <div class="modal-title" id="bg-modal-title">Background</div>
+        <button
+          class="modal-close"
+          id="modal-close"
+          type="button"
+          aria-label="Close background settings"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M18 6 6 18" />
+            <path d="M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-group">
+        <label class="modal-label" for="bg-url">Image link</label>
+        <input
+          class="modal-text"
+          id="bg-url"
+          type="url"
+          placeholder="https://example.com/wallpaper.jpg"
+        />
+      </div>
+
+      <div class="modal-row" style="margin-bottom: 14px">
+        <button class="modal-button primary" id="apply-url" type="button">
+          Use image link
+        </button>
+        <button class="modal-button" id="use-random" type="button">
+          Random Unsplash
+        </button>
+      </div>
+
+      <div class="modal-group">
+        <div class="modal-label">Blur</div>
+        <div class="slider-wrap">
+          <input
+            class="blur-slider"
+            id="blur-slider"
+            type="range"
+            min="0"
+            max="36"
+            step="1"
+            value="0"
+          />
+          <div class="slider-value" id="blur-value">0px</div>
+        </div>
+      </div>
+      <div class="modal-group">
+        <div class="modal-label">Glass card blur</div>
+        <div class="slider-wrap">
+          <input
+            class="blur-slider"
+            id="card-blur-slider"
+            type="range"
+            min="0"
+            max="36"
+            step="1"
+            value="20"
+          />
+          <div class="slider-value" id="card-blur-value">20px</div>
+        </div>
+      </div>
+
+      <div class="modal-group">
+        <div class="modal-label">Local wallpapers</div>
+
+        <input
+          class="hidden-file-input"
+          id="local-bg-input"
+          type="file"
+          accept="image/*"
+          multiple
+        />
+
+        <div class="thumb-grid" id="thumb-grid">
+          <div class="upload-tile">
+            <button class="upload-button" id="upload-thumb" type="button">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 16V6" />
+                <path d="m7 11 5-5 5 5" />
+                <path d="M4 18h16" />
+              </svg>
+              <span>Add</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-row" style="margin-bottom: 10px">
+        <button class="modal-button" id="clear-bg" type="button">Clear</button>
+      </div>
+
+      <div class="modal-note">
+        Images works best when they point directly to an image url.
+      </div>
     </div>
 
-  </div>
-</div>
+    <div class="meta-bottom">
+      <div class="meta-date">
+        <span class="meta-date-strong" id="meta-day">tue</span>
+        <span class="meta-date-soft" id="meta-ordinal">eighteenth</span>
+      </div>
 
-<!-- Clock -->
-<div class="clock">
-  <span class="clock-hh" id="clock-hh">00</span>
-  <span class="clock-mm" id="clock-mm">00</span>
-</div>
+      <div class="meta-weather">
+        <span class="meta-weather-strong" id="meta-temp">--°</span>
+        <span class="meta-weather-soft" id="meta-cond">locating</span>
+      </div>
+    </div>
 
-<script>
-// ── Clock ──
-function updateClock() {
-  const now = new Date();
-  document.getElementById('clock-hh').textContent = String(now.getHours()).padStart(2,'0');
-  document.getElementById('clock-mm').textContent = String(now.getMinutes()).padStart(2,'0');
-}
-updateClock();
-setInterval(updateClock, 5000);
+    <div class="clock">
+      <span class="clock-hh" id="clock-hh">00</span>
+      <span class="clock-mm" id="clock-mm">00</span>
+    </div>
 
-// ── Date ──
-(function() {
-  const ordinals = ['','first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth',
-    'eleventh','twelfth','thirteenth','fourteenth','fifteenth','sixteenth','seventeenth','eighteenth',
-    'nineteenth','twentieth','twenty‑first','twenty‑second','twenty‑third','twenty‑fourth',
-    'twenty‑fifth','twenty‑sixth','twenty‑seventh','twenty‑eighth','twenty‑ninth',
-    'thirtieth','thirty‑first'];
-  const days = ['sun','mon','tue','wed','thu','fri','sat'];
-  const now = new Date();
-  document.getElementById('meta-date').textContent = days[now.getDay()] + ' ' + ordinals[now.getDate()];
-})();
+    <script>
+      function updateClock() {
+        const now = new Date();
+        document.getElementById("clock-hh").textContent = String(
+          now.getHours(),
+        ).padStart(2, "0");
+        document.getElementById("clock-mm").textContent = String(
+          now.getMinutes(),
+        ).padStart(2, "0");
+      }
+      updateClock();
+      setInterval(updateClock, 5000);
 
-// ── Auto-focus search ──
-window.addEventListener('load', () => { document.getElementById('search').focus(); });
+      function updateDate() {
+        const ordinals = [
+          "",
+          "first",
+          "second",
+          "third",
+          "fourth",
+          "fifth",
+          "sixth",
+          "seventh",
+          "eighth",
+          "ninth",
+          "tenth",
+          "eleventh",
+          "twelfth",
+          "thirteenth",
+          "fourteenth",
+          "fifteenth",
+          "sixteenth",
+          "seventeenth",
+          "eighteenth",
+          "nineteenth",
+          "twentieth",
+          "twenty‑first",
+          "twenty‑second",
+          "twenty‑third",
+          "twenty‑fourth",
+          "twenty‑fifth",
+          "twenty‑sixth",
+          "twenty‑seventh",
+          "twenty‑eighth",
+          "twenty‑ninth",
+          "thirtieth",
+          "thirty‑first",
+        ];
 
-// ── Google Suggestions ──
-const input = document.getElementById('search');
-const sugBox = document.getElementById('suggestions');
-let activeIdx = -1;
-let currentItems = [];
+        const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+        const now = new Date();
 
-function openSuggestions(items) {
-  currentItems = items;
-  activeIdx = -1;
-  if (!items.length) { sugBox.classList.remove('open'); return; }
-  sugBox.innerHTML = items.map((s, i) => `
-    <div class="suggestion-item" data-q="${s.replace(/"/g,'&quot;')}">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-      ${s}
-    </div>`).join('');
-  sugBox.classList.add('open');
-  sugBox.querySelectorAll('.suggestion-item').forEach(el => {
-    el.addEventListener('mousedown', e => { e.preventDefault(); });
-    el.addEventListener('click', () => {
-      window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(el.dataset.q);
-    });
-  });
-}
+        document.getElementById("meta-day").textContent = days[now.getDay()];
+        document.getElementById("meta-ordinal").textContent =
+          ordinals[now.getDate()];
+      }
+      updateDate();
 
-let debounceTimer;
-input.addEventListener('input', () => {
-  clearTimeout(debounceTimer);
-  const q = input.value.trim();
-  if (!q) { sugBox.classList.remove('open'); currentItems=[]; return; }
-  debounceTimer = setTimeout(() => {
-    const script = document.createElement('script');
-    window.__gacb = function(data) {
-      openSuggestions(data[1].map(x => x[0]).slice(0, 6));
-      if (script.parentNode) script.parentNode.removeChild(script);
-    };
-    script.src = 'https://suggestqueries.google.com/complete/search?client=firefox&q=' + encodeURIComponent(q) + '&callback=__gacb';
-    document.head.appendChild(script);
-  }, 200);
-});
+      async function loadWeather() {
+        const tempEl = document.getElementById("meta-temp");
+        const condEl = document.getElementById("meta-cond");
 
-input.addEventListener('keydown', e => {
-  const els = sugBox.querySelectorAll('.suggestion-item');
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    activeIdx = Math.min(activeIdx + 1, currentItems.length - 1);
-    els.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
-    if (activeIdx >= 0) input.value = currentItems[activeIdx];
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    activeIdx = Math.max(activeIdx - 1, -1);
-    els.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
-    if (activeIdx >= 0) input.value = currentItems[activeIdx];
-  } else if (e.key === 'Enter') {
-    const q = activeIdx >= 0 ? currentItems[activeIdx] : input.value.trim();
-    if (q) window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(q);
-  } else if (e.key === 'Escape') {
-    sugBox.classList.remove('open'); activeIdx = -1;
-  }
-});
+        const WEATHER_CODES = {
+          0: "clear",
+          1: "mostly clear",
+          2: "partly cloudy",
+          3: "cloudy",
+          45: "fog",
+          48: "fog",
+          51: "drizzle",
+          53: "drizzle",
+          55: "drizzle",
+          56: "freezing drizzle",
+          57: "freezing drizzle",
+          61: "rain",
+          63: "rain",
+          65: "heavy rain",
+          66: "freezing rain",
+          67: "freezing rain",
+          71: "snow",
+          73: "snow",
+          75: "heavy snow",
+          77: "snow grains",
+          80: "showers",
+          81: "showers",
+          82: "heavy showers",
+          85: "snow showers",
+          86: "snow showers",
+          95: "thunderstorm",
+          96: "storm hail",
+          99: "storm hail",
+        };
 
-document.addEventListener('click', e => {
-  if (!input.contains(e.target) && !sugBox.contains(e.target)) sugBox.classList.remove('open');
-});
-</script>
-</body>
+        const setWeather = (temp, cond) => {
+          tempEl.textContent = temp;
+          condEl.textContent = cond;
+        };
+
+        const getPosition = () =>
+          new Promise((resolve, reject) => {
+            if (!navigator.geolocation) {
+              reject(new Error("Geolocation unsupported"));
+              return;
+            }
+
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+              enableHighAccuracy: false,
+              timeout: 8000,
+              maximumAge: 15 * 60 * 1000,
+            });
+          });
+
+        try {
+          if (navigator.permissions?.query) {
+            const permission = await navigator.permissions.query({
+              name: "geolocation",
+            });
+
+            if (permission.state === "denied") {
+              setWeather("--°", "location off");
+              return;
+            }
+
+            setWeather(
+              "--°",
+              permission.state === "granted" ? "updating" : "allow location",
+            );
+          } else {
+            setWeather("--°", "locating");
+          }
+
+          const position = await getPosition();
+          const { latitude, longitude } = position.coords;
+
+          const url = new URL("https://api.open-meteo.com/v1/forecast");
+          url.searchParams.set("latitude", latitude);
+          url.searchParams.set("longitude", longitude);
+          url.searchParams.set("current", "temperature_2m,weather_code");
+          url.searchParams.set("timezone", "auto");
+
+          const response = await fetch(url.toString());
+          if (!response.ok) throw new Error("Weather fetch failed");
+
+          const data = await response.json();
+          const current = data.current || {};
+
+          const temp = Math.round(current.temperature_2m);
+          const label = WEATHER_CODES[current.weather_code] || "weather";
+
+          setWeather(`${temp >= 0 ? "+" : ""}${temp}°`, label);
+        } catch (error) {
+          setWeather("--°", "location off");
+        }
+      }
+
+      loadWeather();
+      setInterval(loadWeather, 10 * 60 * 1000);
+
+      const input = document.getElementById("search");
+
+      window.addEventListener("load", () => {
+        input.focus();
+      });
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const q = input.value.trim();
+          if (q) {
+            window.location.href =
+              "https://www.google.com/search?q=" + encodeURIComponent(q);
+          }
+        }
+      });
+
+      const root = document.documentElement;
+      const bgTrigger = document.getElementById("bg-trigger");
+      const bgModal = document.getElementById("bg-modal");
+      const modalBackdrop = document.getElementById("modal-backdrop");
+      const modalClose = document.getElementById("modal-close");
+      const bgUrl = document.getElementById("bg-url");
+      const applyUrl = document.getElementById("apply-url");
+      const useRandom = document.getElementById("use-random");
+      const clearBg = document.getElementById("clear-bg");
+      const blurSlider = document.getElementById("blur-slider");
+      const blurValue = document.getElementById("blur-value");
+      const cardBlurSlider = document.getElementById("card-blur-slider");
+      const cardBlurValue = document.getElementById("card-blur-value");
+      const localBgInput = document.getElementById("local-bg-input");
+      const uploadThumb = document.getElementById("upload-thumb");
+      const thumbGrid = document.getElementById("thumb-grid");
+      const searchTools = document.getElementById("search-tools");
+
+      const localWallpapers = [];
+      let activeWallpaperUrl = "";
+
+      cardBlurSlider.addEventListener("input", (e) => {
+        setCardBlur(e.target.value);
+      });
+
+      uploadThumb.addEventListener("click", () => {
+        localBgInput.click();
+      });
+
+      localBgInput.addEventListener("change", (e) => {
+        const files = Array.from(e.target.files || []);
+        if (!files.length) return;
+
+        files.forEach((file) => {
+          if (!file.type.startsWith("image/")) return;
+          const objectUrl = URL.createObjectURL(file);
+          localWallpapers.unshift(objectUrl);
+        });
+
+        const unique = Array.from(new Set(localWallpapers)).slice(0, 12);
+        localWallpapers.length = 0;
+        localWallpapers.push(...unique);
+
+        if (localWallpapers[0]) {
+          bgUrl.value = "";
+          setWallpaper(localWallpapers[0]);
+        } else {
+          renderLocalThumbs();
+        }
+
+        localBgInput.value = "";
+      });
+
+      function setWallpaper(url) {
+        activeWallpaperUrl = url || "";
+
+        if (!url) {
+          root.style.setProperty("--wallpaper-image", "none");
+          renderLocalThumbs();
+          return;
+        }
+
+        root.style.setProperty("--wallpaper-image", `url("${url}")`);
+        renderLocalThumbs();
+      }
+
+      function setBlur(value) {
+        root.style.setProperty("--wallpaper-blur", `${value}px`);
+        blurValue.textContent = `${value}px`;
+      }
+
+      function setCardBlur(value) {
+        root.style.setProperty("--card-blur", `${value}px`);
+        cardBlurValue.textContent = `${value}px`;
+      }
+
+      function renderLocalThumbs() {
+        const oldThumbs = thumbGrid.querySelectorAll(".thumb-item");
+        oldThumbs.forEach((el) => el.remove());
+
+        localWallpapers.forEach((src) => {
+          const item = document.createElement("div");
+          item.className =
+            "thumb-item" + (src === activeWallpaperUrl ? " active" : "");
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "thumb-button";
+          button.title = "Use local wallpaper";
+
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = "Local wallpaper thumbnail";
+          img.loading = "lazy";
+
+          button.appendChild(img);
+          button.addEventListener("click", () => {
+            bgUrl.value = "";
+            setWallpaper(src);
+            closeModal();
+          });
+
+          item.appendChild(button);
+          thumbGrid.appendChild(item);
+        });
+      }
+
+      function openModal() {
+        bgModal.classList.add("open");
+        modalBackdrop.classList.add("open");
+        searchTools.classList.add("force-show");
+        setTimeout(() => bgUrl.focus(), 30);
+      }
+
+      function closeModal() {
+        bgModal.classList.remove("open");
+        modalBackdrop.classList.remove("open");
+        searchTools.classList.remove("force-show");
+      }
+
+      bgTrigger.addEventListener("click", openModal);
+      modalClose.addEventListener("click", closeModal);
+      modalBackdrop.addEventListener("click", closeModal);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && bgModal.classList.contains("open")) {
+          closeModal();
+        }
+      });
+
+      applyUrl.addEventListener("click", () => {
+        const url = bgUrl.value.trim();
+        if (!url) return;
+        setWallpaper(url);
+        closeModal();
+      });
+
+      useRandom.addEventListener("click", () => {
+        const seed = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        const url = `https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=80&sig=${seed}`;
+        setWallpaper(url);
+        closeModal();
+      });
+
+      clearBg.addEventListener("click", () => {
+        bgUrl.value = "";
+        setWallpaper("");
+      });
+
+      blurSlider.addEventListener("input", (e) => {
+        setBlur(e.target.value);
+      });
+
+      setBlur(blurSlider.value);
+      setCardBlur(cardBlurSlider.value);
+      renderLocalThumbs();
+    </script>
+  </body>
 </html>
