@@ -2,7 +2,7 @@
 css for ilstr01 dark & light theme for  Discord 
 will automatically change depending on system theme.
 
-#Wallpaper
+# Wallpaper
 can use local wallpapers and also from unsplash generate and link directly to the img.
 
 
