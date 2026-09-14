@@ -1,5 +1,7 @@
 # ilstr01-dark
-css for ilstr01 dark theme for  Discord 
+-------------------------------------
+css for ilstr01 dark & light theme for  Discord 
+will automatically change depending on system theme.
 
 
 
