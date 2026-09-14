@@ -1,4 +1,4 @@
-# Twinni7
+# Twinni7 Web browser start screen 
 Start/new tab screen for your web browser with weather and clock, 
 Dark & light theme will automatically change depending on system theme.
 
