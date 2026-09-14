@@ -1,6 +1,6 @@
-# ilstr01-dark
-css for ilstr01 dark & light theme for  Discord 
-will automatically change depending on system theme.
+# Twinni7
+Start/new tab screen for your web browser with weather and clock, 
+Dark & light theme will automatically change depending on system theme.
 
 # Wallpaper
 can use local wallpapers and also from unsplash generate and link directly to the img.
