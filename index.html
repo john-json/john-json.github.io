@@ -1248,59 +1248,88 @@
           condEl.textContent = cond;
         };
 
-        const getPosition = () =>
-          new Promise((resolve, reject) => {
-            if (!navigator.geolocation) {
-              reject(new Error("Geolocation unsupported"));
-              return;
-            }
+        // --- Permanent geolocation: coords are cached forever in localStorage.
+        // The browser permission prompt only fires once. After that, cached
+        // coords are reused silently and refreshed in the background hourly.
+        const GEO_KEY = "geo_coords";
+        const GEO_TS_KEY = "geo_ts";
+        const GEO_REFRESH_MS = 60 * 60 * 1000; // refresh coords every 1 hour silently
 
+        const getCachedCoords = () => {
+          try {
+            const lat = localStorage.getItem(GEO_KEY + "_lat");
+            const lon = localStorage.getItem(GEO_KEY + "_lon");
+            const ts  = parseInt(localStorage.getItem(GEO_TS_KEY) || "0", 10);
+            if (lat && lon) return { latitude: parseFloat(lat), longitude: parseFloat(lon), ts };
+          } catch (_) {}
+          return null;
+        };
+
+        const saveCoords = (lat, lon) => {
+          try {
+            localStorage.setItem(GEO_KEY + "_lat", lat);
+            localStorage.setItem(GEO_KEY + "_lon", lon);
+            localStorage.setItem(GEO_TS_KEY, Date.now());
+          } catch (_) {}
+        };
+
+        const fetchFreshPosition = () =>
+          new Promise((resolve, reject) => {
+            if (!navigator.geolocation) { reject(new Error("unsupported")); return; }
             navigator.geolocation.getCurrentPosition(resolve, reject, {
               enableHighAccuracy: false,
               timeout: 8000,
-              maximumAge: 15 * 60 * 1000,
+              maximumAge: 0,
             });
           });
 
-        try {
-          if (navigator.permissions?.query) {
-            const permission = await navigator.permissions.query({
-              name: "geolocation",
-            });
-
-            if (permission.state === "denied") {
-              setWeather("--°", "location off");
-              return;
-            }
-
-            setWeather(
-              "--°",
-              permission.state === "granted" ? "updating" : "allow location",
-            );
-          } else {
-            setWeather("--°", "locating");
-          }
-
-          const position = await getPosition();
-          const { latitude, longitude } = position.coords;
-
+        const fetchWeather = async (latitude, longitude) => {
           const url = new URL("https://api.open-meteo.com/v1/forecast");
           url.searchParams.set("latitude", latitude);
           url.searchParams.set("longitude", longitude);
           url.searchParams.set("current", "temperature_2m,weather_code");
           url.searchParams.set("timezone", "auto");
-
           const response = await fetch(url.toString());
           if (!response.ok) throw new Error("Weather fetch failed");
-
           const data = await response.json();
           const current = data.current || {};
-
           const temp = Math.round(current.temperature_2m);
           const label = WEATHER_CODES[current.weather_code] || "weather";
-
           setWeather(`${temp >= 0 ? "+" : ""}${temp}°`, label);
-        } catch (error) {
+        };
+
+        try {
+          const cached = getCachedCoords();
+          const now = Date.now();
+
+          if (cached) {
+            // Use cached coords immediately — no prompt, no delay
+            setWeather("--°", "updating");
+            await fetchWeather(cached.latitude, cached.longitude);
+
+            // Silently refresh coords in background if older than 1 hour
+            if (now - cached.ts > GEO_REFRESH_MS) {
+              fetchFreshPosition().then(pos => {
+                saveCoords(pos.coords.latitude, pos.coords.longitude);
+              }).catch(() => {});
+            }
+          } else {
+            // First-ever visit: check browser permission state before prompting
+            if (navigator.permissions?.query) {
+              const perm = await navigator.permissions.query({ name: "geolocation" });
+              if (perm.state === "denied") { setWeather("--°", "location off"); return; }
+              setWeather("--°", perm.state === "granted" ? "updating" : "allow location");
+            } else {
+              setWeather("--°", "locating");
+            }
+
+            // Ask for permission once — result is then stored permanently
+            const pos = await fetchFreshPosition();
+            const { latitude, longitude } = pos.coords;
+            saveCoords(latitude, longitude);
+            await fetchWeather(latitude, longitude);
+          }
+        } catch (_) {
           setWeather("--°", "location off");
         }
       }
@@ -1462,8 +1491,10 @@
       });
 
       useRandom.addEventListener("click", () => {
-        const seed = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-        const url = `https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=80&sig=${seed}`;
+        // source.unsplash.com/random returns a genuinely random photo each call.
+        // The cache-busting timestamp prevents the browser from serving a cached redirect.
+        const ts = Date.now();
+        const url = `https://source.unsplash.com/random/2200x1400/?landscape,nature,mountains,forest&t=${ts}`;
         setWallpaper(url);
         closeModal();
       });
