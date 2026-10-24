@@ -1494,7 +1494,7 @@
         // source.unsplash.com/random returns a genuinely random photo each call.
         // The cache-busting timestamp prevents the browser from serving a cached redirect.
         const ts = Date.now();
-        const url = `https://source.unsplash.com/random/2200x1400/?landscape,nature,mountains,forest&t=${ts}`;
+        const url = `https://unsplash.it/1920/1080/?random`;
         setWallpaper(url);
         closeModal();
       });
